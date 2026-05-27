@@ -1,0 +1,80 @@
+[
+  {
+    "request_id": "REQ-001",
+    "request_type": "Model promotion",
+    "resource_id": "logistics-disruption-agent",
+    "resource_name": "Logistics Disruption Agent — promotion to Production",
+    "requested_by": "USR-006",
+    "requested_date": "2026-05-20",
+    "status": "Pending",
+    "reviewed_by": null,
+    "review_date": null,
+    "review_notes": null,
+    "approval_level_required": "Governance Lead"
+  },
+  {
+    "request_id": "REQ-002",
+    "request_type": "API key generation",
+    "resource_id": "DP-005",
+    "resource_name": "API key for Maintenance Work Order History",
+    "requested_by": "USR-010",
+    "requested_date": "2026-05-24",
+    "status": "Pending",
+    "reviewed_by": null,
+    "review_date": null,
+    "review_notes": null,
+    "approval_level_required": "Domain Lead"
+  },
+  {
+    "request_id": "REQ-003",
+    "request_type": "Data product access",
+    "resource_id": "DP-002",
+    "resource_name": "Read access to Contract Spend History",
+    "requested_by": "USR-008",
+    "requested_date": "2026-04-10",
+    "status": "Approved",
+    "reviewed_by": "USR-002",
+    "review_date": "2026-04-12",
+    "review_notes": "Approved for read-only access. Category management use case validated.",
+    "approval_level_required": "Domain Lead"
+  },
+  {
+    "request_id": "REQ-004",
+    "request_type": "AI model deployment",
+    "resource_id": "inventory-planning-assistant",
+    "resource_name": "Inventory Planning Assistant — production deployment",
+    "requested_by": "USR-006",
+    "requested_date": "2026-01-05",
+    "status": "Approved",
+    "reviewed_by": "USR-007",
+    "review_date": "2026-01-18",
+    "review_notes": "Governance review complete. All evaluations passed. Low risk classification confirmed.",
+    "approval_level_required": "Governance Lead"
+  },
+  {
+    "request_id": "REQ-005",
+    "request_type": "API key generation",
+    "resource_id": "DP-005",
+    "resource_name": "API key for Maintenance Work Order History (previous request)",
+    "requested_by": "USR-010",
+    "requested_date": "2026-03-01",
+    "status": "Rejected",
+    "reviewed_by": "USR-003",
+    "review_date": "2026-03-05",
+    "review_notes": "Rejected: requester does not have the required data access training certification for Restricted classification data products. Resubmit after completing EQUINOR-DATA-201 and EQUINOR-AI-101 training modules.",
+    "approval_level_required": "Domain Lead"
+  },
+  {
+    "request_id": "REQ-006",
+    "request_type": "Governance review",
+    "resource_id": "logistics-disruption-agent",
+    "resource_name": "Governance review: Logistics Disruption Agent — safety assessment",
+    "requested_by": "USR-003",
+    "requested_date": "2026-04-28",
+    "status": "Escalated",
+    "reviewed_by": "USR-002",
+    "review_date": "2026-05-02",
+    "review_notes": "Escalated from Domain Lead to Governance Lead. Safety implications require governance board sign-off due to High risk classification and potential for safety-critical logistics decisions.",
+    "approval_level_required": "Governance Lead"
+  }
+]
