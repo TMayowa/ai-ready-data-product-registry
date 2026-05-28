@@ -9,7 +9,7 @@ I designed the architecture and domain logic, then used AI tools to accelerate t
 - Warp as the AI-assisted development terminal
 - Python and Streamlit as the application stack
 
-Copy and paste this link in your browser to access the app - [https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app/]([url](https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app/))
+Copy and paste this link in your browser to access the app - <https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app>
 
 A detailed prompt engineering build log is available in the repository documenting every prompt, design decision, and verification step.
 
