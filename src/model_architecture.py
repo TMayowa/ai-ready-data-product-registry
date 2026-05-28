@@ -11,223 +11,138 @@ from src.models import AIModel
 _DIAGRAMS: dict[str, str] = {
 
 "supplier-risk-agent": """graph TD
-    subgraph input_layer["Input sources"]
-        D1["Supplier Performance Summary"]
-        D2["Contract Spend History"]
-        D3["External risk signals"]
-    end
-    subgraph agent_orchestration["LangGraph orchestration"]
-        direction TB
-        ROUTER["Router<br/>classifies signal type"]
-        DISCARD["Discard - logged"]
-        subgraph scanning["Signal scanning"]
-            SCAN["Scanner agent<br/>Claude 3.5 Haiku<br/>High volume, low cost"]
-        end
-        subgraph analysis["Risk analysis"]
-            SYNTH["Synthesis agent<br/>Claude 3.5 Sonnet<br/>Deep reasoning"]
-        end
-        subgraph controls["Governance controls"]
-            CONF["Confidence check"]
-            TRACE["Source traceability"]
-            ESC["Escalation rules"]
-        end
-    end
-    subgraph output_layer["Outputs"]
-        REC["Risk assessment and recommendations"]
-        DASH["Dashboard alert"]
-        HUM["Human review queue"]
-    end
-    D1 --> ROUTER
-    D2 --> ROUTER
-    D3 --> ROUTER
-    ROUTER --> SCAN
-    SCAN -->|risk signal| SYNTH
-    SCAN -->|no risk| DISCARD
-    SYNTH --> CONF
-    CONF -->|high confidence| TRACE
-    CONF -->|low confidence| ESC
-    TRACE --> REC
-    TRACE --> DASH
-    ESC --> HUM
-    style input_layer fill:#E6F1FB,stroke:#185FA5
-    style agent_orchestration fill:#FAFAFA,stroke:#5F5E5A
-    style scanning fill:#F1EFE8,stroke:#5F5E5A
-    style analysis fill:#EEEDFE,stroke:#534AB7
-    style controls fill:#FAEEDA,stroke:#854F0B
-    style output_layer fill:#E1F5EE,stroke:#0F6E56""",
+    D1[Supplier Performance Summary] --> ROUTER
+    D2[Contract Spend History] --> ROUTER
+    D3[External risk signals] --> ROUTER
+    ROUTER[Router] --> SCAN
+    SCAN[Scanner - Claude 3.5 Haiku] -->|risk signal| SYNTH
+    SCAN -->|no risk| DISC[Discard]
+    SYNTH[Synthesiser - Claude 3.5 Sonnet] --> CONF[Confidence check]
+    CONF -->|high confidence| TRACE[Source traceability]
+    CONF -->|low confidence| ESC[Escalation rules]
+    TRACE --> REC[Risk assessment]
+    TRACE --> DASH[Dashboard alert]
+    ESC --> HUM[Human review queue]
+    style D1 fill:#E6F1FB,stroke:#185FA5
+    style D2 fill:#E6F1FB,stroke:#185FA5
+    style D3 fill:#E6F1FB,stroke:#185FA5
+    style SCAN fill:#F1EFE8,stroke:#5F5E5A
+    style SYNTH fill:#EEEDFE,stroke:#534AB7
+    style CONF fill:#FAEEDA,stroke:#854F0B
+    style TRACE fill:#FAEEDA,stroke:#854F0B
+    style ESC fill:#FAEEDA,stroke:#854F0B
+    style REC fill:#E1F5EE,stroke:#0F6E56
+    style DASH fill:#E1F5EE,stroke:#0F6E56
+    style HUM fill:#FAECE7,stroke:#993C1D""",
 
 "contract-insights-assistant": """graph TD
-    subgraph input["Input"]
-        D1["Contract Spend History"]
-        Q["User query"]
-    end
-    subgraph processing["Processing pipeline"]
-        direction TB
-        CTX["Context assembly<br/>retrieve relevant contracts,<br/>spend records, terms"]
-        LLM["Claude 3.5 Haiku<br/>analyse, summarise,<br/>surface insights"]
-        VAL["Output validation<br/>check for hallucination,<br/>verify against source"]
-        REJ["Rejected - flagged for review"]
-    end
-    subgraph output["Output"]
-        INS["Contract insight report"]
-        SRC["Source references"]
-    end
-    D1 --> CTX
-    Q --> CTX
-    CTX --> LLM
-    LLM --> VAL
-    VAL -->|validated| INS
-    VAL -->|sources attached| SRC
-    VAL -->|validation failed| REJ
-    style input fill:#E6F1FB,stroke:#185FA5
-    style processing fill:#EEEDFE,stroke:#534AB7
-    style output fill:#E1F5EE,stroke:#0F6E56""",
+    D1[Contract Spend History] --> CTX
+    Q[User query] --> CTX
+    CTX[Context assembly] --> LLM
+    LLM[Claude 3.5 Haiku] --> VAL
+    VAL[Output validation] -->|validated| INS[Contract insight report]
+    VAL -->|sources attached| SRC[Source references]
+    VAL -->|failed| REJ[Rejected - flagged for review]
+    style D1 fill:#E6F1FB,stroke:#185FA5
+    style Q fill:#E6F1FB,stroke:#185FA5
+    style CTX fill:#EEEDFE,stroke:#534AB7
+    style LLM fill:#EEEDFE,stroke:#534AB7
+    style VAL fill:#EEEDFE,stroke:#534AB7
+    style INS fill:#E1F5EE,stroke:#0F6E56
+    style SRC fill:#E1F5EE,stroke:#0F6E56
+    style REJ fill:#FAECE7,stroke:#993C1D""",
 
 "logistics-disruption-agent": """graph TD
-    subgraph input["Input sources"]
-        D1["Logistics Delay Events"]
-        D2["Inventory Availability Snapshot"]
-        W["Weather API - Met.no"]
-        V["Vessel AIS tracking"]
-    end
-    subgraph agent["LangGraph orchestration"]
-        direction TB
-        MON["Monitor agent<br/>Claude 3.5 Haiku<br/>event classification"]
-        PRED["Prediction agent<br/>Claude 3.5 Sonnet<br/>disruption probability"]
-        CONT["Contingency agent<br/>Claude 3.5 Sonnet<br/>alternative routing"]
-        subgraph safety["Safety gate"]
-            CHECK["Safety-critical check"]
-        end
-    end
-    subgraph output["Outputs"]
-        ALERT["Disruption alert"]
-        PLAN["Contingency plan"]
-        ESC["Safety escalation - human required"]
-    end
-    D1 --> MON
-    W --> MON
-    V --> MON
-    MON -->|disruption likely| PRED
-    PRED --> CONT
-    D2 --> CONT
-    CONT --> CHECK
-    CHECK -->|standard| ALERT
-    CHECK -->|standard| PLAN
-    CHECK -->|safety critical| ESC
-    style input fill:#E6F1FB,stroke:#185FA5
-    style agent fill:#FAFAFA,stroke:#5F5E5A
-    style safety fill:#FAECE7,stroke:#993C1D
-    style output fill:#E1F5EE,stroke:#0F6E56""",
+    D1[Logistics Delay Events] --> MON
+    D2[Inventory Availability Snapshot] --> CONT
+    W[Weather API] --> MON
+    V[Vessel AIS] --> MON
+    MON[Monitor - Claude 3.5 Haiku] -->|disruption likely| PRED
+    PRED[Prediction - Claude 3.5 Sonnet] --> CONT
+    CONT[Contingency - Claude 3.5 Sonnet] --> CHECK
+    CHECK[Safety-critical check] -->|standard| ALERT[Disruption alert]
+    CHECK -->|standard| PLAN[Contingency plan]
+    CHECK -->|safety critical| ESC[Safety escalation]
+    style D1 fill:#E6F1FB,stroke:#185FA5
+    style D2 fill:#E6F1FB,stroke:#185FA5
+    style W fill:#E6F1FB,stroke:#185FA5
+    style V fill:#E6F1FB,stroke:#185FA5
+    style MON fill:#F1EFE8,stroke:#5F5E5A
+    style PRED fill:#EEEDFE,stroke:#534AB7
+    style CONT fill:#EEEDFE,stroke:#534AB7
+    style CHECK fill:#FAECE7,stroke:#993C1D
+    style ALERT fill:#E1F5EE,stroke:#0F6E56
+    style PLAN fill:#E1F5EE,stroke:#0F6E56
+    style ESC fill:#FAECE7,stroke:#993C1D""",
 
 "inventory-planning-assistant": """graph TD
-    subgraph input["Input"]
-        D1["Inventory Availability Snapshot"]
-    end
-    subgraph feature_eng["Feature engineering"]
-        F1["Consumption history<br/>rolling averages"]
-        F2["Seasonal patterns<br/>monthly, quarterly"]
-        F3["Lead time features<br/>supplier delivery"]
-        F4["Criticality weighting<br/>spare part class"]
-    end
-    subgraph model["Model"]
-        XGB["XGBoost<br/>demand forecast"]
-        RULES["Business rules<br/>safety stock, reorder constraints"]
-    end
-    subgraph output["Output"]
-        FORE["Demand forecast"]
-        REC["Reorder recommendations"]
-        ALERT["Low stock alerts"]
-    end
-    D1 --> F1
+    D1[Inventory Availability Snapshot] --> F1
     D1 --> F2
     D1 --> F3
     D1 --> F4
-    F1 --> XGB
-    F2 --> XGB
-    F3 --> XGB
-    F4 --> XGB
-    XGB --> RULES
-    RULES --> FORE
-    RULES --> REC
-    RULES --> ALERT
-    style input fill:#E6F1FB,stroke:#185FA5
-    style feature_eng fill:#F1EFE8,stroke:#5F5E5A
-    style model fill:#EEEDFE,stroke:#534AB7
-    style output fill:#E1F5EE,stroke:#0F6E56""",
+    F1[Consumption history] --> XGB
+    F2[Seasonal patterns] --> XGB
+    F3[Lead time features] --> XGB
+    F4[Criticality weighting] --> XGB
+    XGB[XGBoost demand forecast] --> RULES
+    RULES[Business rules] --> FORE[Demand forecast]
+    RULES --> REC[Reorder recommendations]
+    RULES --> ALERT[Low stock alerts]
+    style D1 fill:#E6F1FB,stroke:#185FA5
+    style F1 fill:#F1EFE8,stroke:#5F5E5A
+    style F2 fill:#F1EFE8,stroke:#5F5E5A
+    style F3 fill:#F1EFE8,stroke:#5F5E5A
+    style F4 fill:#F1EFE8,stroke:#5F5E5A
+    style XGB fill:#EEEDFE,stroke:#534AB7
+    style RULES fill:#EEEDFE,stroke:#534AB7
+    style FORE fill:#E1F5EE,stroke:#0F6E56
+    style REC fill:#E1F5EE,stroke:#0F6E56
+    style ALERT fill:#E1F5EE,stroke:#0F6E56""",
 
 "maintenance-planning-agent": """graph TD
-    subgraph input["Input sources"]
-        D1["Maintenance Work Order History"]
-        IOT["IoT sensor readings<br/>vibration, temperature, pressure"]
-        INSP["Inspection records"]
-    end
-    subgraph feature["Feature extraction"]
-        TS["Time-series features<br/>sensor trends, rolling stats"]
-        WO["Work order features<br/>failure codes, intervals, costs"]
-        EQ["Equipment profile<br/>age, class, criticality"]
-    end
-    subgraph ensemble["Ensemble model"]
-        LSTM["LSTM<br/>temporal patterns in sensor data"]
-        RF["Random Forest<br/>failure probability from work order history"]
-        COMB["Ensemble combiner<br/>weighted average"]
-    end
-    subgraph safety_gate["Safety gate - ALL outputs reviewed"]
-        REV["Mandatory human review<br/>for safety-critical equipment"]
-    end
-    subgraph output["Output"]
-        PRED["Failure prediction"]
-        PRIO["Backlog prioritisation"]
-        FLAG["Regulatory maintenance flag"]
-    end
-    D1 --> WO
-    IOT --> TS
-    INSP --> EQ
-    TS --> LSTM
-    WO --> RF
-    EQ --> RF
-    LSTM --> COMB
-    RF --> COMB
-    COMB --> REV
-    REV --> PRED
-    REV --> PRIO
-    REV --> FLAG
-    style input fill:#E6F1FB,stroke:#185FA5
-    style feature fill:#F1EFE8,stroke:#5F5E5A
-    style ensemble fill:#EEEDFE,stroke:#534AB7
-    style safety_gate fill:#FAECE7,stroke:#993C1D,stroke-width:2px
-    style output fill:#E1F5EE,stroke:#0F6E56""",
+    D1[Maintenance Work Order History] --> WO
+    IOT[IoT sensor readings] --> TS
+    INSP[Inspection records] --> EQ
+    TS[Time-series features] --> LSTM
+    WO[Work order features] --> RF
+    EQ[Equipment profile] --> RF
+    LSTM[LSTM temporal model] --> COMB
+    RF[Random Forest] --> COMB
+    COMB[Ensemble combiner] --> REV
+    REV[Mandatory human review] --> PRED[Failure prediction]
+    REV --> PRIO[Backlog prioritisation]
+    REV --> FLAG[Regulatory flag]
+    style D1 fill:#E6F1FB,stroke:#185FA5
+    style IOT fill:#E6F1FB,stroke:#185FA5
+    style INSP fill:#E6F1FB,stroke:#185FA5
+    style TS fill:#F1EFE8,stroke:#5F5E5A
+    style WO fill:#F1EFE8,stroke:#5F5E5A
+    style EQ fill:#F1EFE8,stroke:#5F5E5A
+    style LSTM fill:#EEEDFE,stroke:#534AB7
+    style RF fill:#EEEDFE,stroke:#534AB7
+    style COMB fill:#EEEDFE,stroke:#534AB7
+    style REV fill:#FAECE7,stroke:#993C1D,stroke-width:2px
+    style PRED fill:#E1F5EE,stroke:#0F6E56
+    style PRIO fill:#E1F5EE,stroke:#0F6E56
+    style FLAG fill:#E1F5EE,stroke:#0F6E56""",
 
 "procurement-anomaly-detector": """graph TD
-    subgraph input["Input"]
-        D1["Supplier Performance Summary"]
-        D2["Contract Spend History"]
-    end
-    subgraph preprocessing["Preprocessing"]
-        JOIN["Join supplier and spend records"]
-        FEAT["Feature extraction<br/>spend deviation, frequency,<br/>vendor patterns, timing"]
-    end
-    subgraph model["Detection model"]
-        ISO["Isolation Forest<br/>unsupervised anomaly scoring"]
-        FILT["Rule-based filters<br/>duplicate POs, round-number invoices"]
-    end
-    subgraph output["Output"]
-        SCORE["Anomaly score"]
-        FLAG["Flagged transactions"]
-        RPT["Investigation report"]
-    end
-    D1 --> JOIN
-    D2 --> JOIN
-    JOIN --> FEAT
-    FEAT --> ISO
+    D1[Supplier Performance Summary] --> JOIN
+    D2[Contract Spend History] --> JOIN
+    JOIN[Join supplier and spend records] --> FEAT
+    FEAT[Feature extraction] --> ISO
     FEAT --> FILT
-    ISO --> SCORE
-    FILT --> FLAG
-    SCORE --> RPT
+    ISO[Isolation Forest] --> SCORE[Anomaly score]
+    FILT[Rule-based filters] --> FLAG[Flagged transactions]
+    SCORE --> RPT[Investigation report]
     FLAG --> RPT
-    style input fill:#E6F1FB,stroke:#185FA5
-    style preprocessing fill:#F1EFE8,stroke:#5F5E5A
-    style model fill:#EEEDFE,stroke:#534AB7
-    style output fill:#E1F5EE,stroke:#0F6E56""",
+    style D1 fill:#E6F1FB,stroke:#185FA5
+    style D2 fill:#E6F1FB,stroke:#185FA5
+    style JOIN fill:#F1EFE8,stroke:#5F5E5A
+    style FEAT fill:#F1EFE8,stroke:#5F5E5A
+    style ISO fill:#EEEDFE,stroke:#534AB7
+    style FILT fill:#EEEDFE,stroke:#534AB7
+    style RPT fill:#E1F5EE,stroke:#0F6E56""",
 }
 
 
