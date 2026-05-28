@@ -1,12 +1,15 @@
 # Background and the idea behind this
 
-I built this as a non-conventional way to show my knowledge and what I have worked with in my current and previous roles. It is difficult to show knowledge and contribution as a product manager especially in a highly regulated environment. This static/mock up app was built by me using the following:
-- A detailed documentation of my knowledge
-- Chatgpt to structure the knowledge
-- A detailed documentation of prompts
-- Claude opus 4.7 to enhance the prompt and select the stack - python and streamlit in this case
-- Warp as the developer terminal and environment
-- Three different AI models working on different aspects - Deepseek V4, Claude 4.6 sonnet & Claude 4.7 Opus
+I built this as a portfolio demonstration of my knowledge across data product governance, AI model management, and enterprise data architecture. As a product manager in a regulated industrial environment, much of my contribution is embedded in processes, decisions, and stakeholder outcomes that are difficult to showcase externally. This app is my way of making that knowledge visible and tangible.
+The governance models, readiness scoring framework, data contracts, process maps, and AI model lifecycle design are all based on patterns I have worked with across procurement, offshore logistics, and contract management at Equinor. The data is fully synthetic.
+How it was built
+I designed the architecture and domain logic, then used AI tools to accelerate the development:
+- Claude Opus 4.6 for prompt design, architecture planning, and stack selection
+- Claude Sonnet 4.6 and DeepSeek V4 Pro for code generation across different modules
+- Warp as the AI-assisted development terminal
+- Python and Streamlit as the application stack
+
+A detailed prompt engineering build log is available in the repository documenting every prompt, design decision, and verification step.
 
 # Mock up app & product description
 This platform demonstrates how enterprise data products and AI models can be structured, documented, and governed so they are safe for analytics and AI-agent consumption in industrial environments.
