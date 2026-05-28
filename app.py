@@ -16,7 +16,8 @@ import streamlit.components.v1 as components
 from src.contract_validator import ai_consumer_summary, validate_contract
 from src.data_mesh import domain_summary, generate_mesh_diagram, mesh_principles_status
 from src.lineage import generate_mermaid
-from src.models import AIModel, APIKey, ApprovalRequest, DataProduct, User
+from src.model_architecture import architecture_caption, generate_model_architecture
+from src.models import AIModel, APIKey, ApprovalRequest, DataProduct, ModelTokenConsumption, User
 from src.process_maps import (
     generate_maintenance_process_map,
     generate_p2p_process_map,
@@ -40,48 +41,85 @@ st.set_page_config(
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
+# ── CSS ───────────────────────────────────────────────────────────────────────
+st.markdown("""
+<style>
+    .block-container { padding-top: 2rem; padding-bottom: 1rem; }
+    .stTabs [data-baseweb="tab-list"] { gap: 4px; }
+    .stTabs [data-baseweb="tab"] { padding: 8px 16px; font-size: 14px; }
+    [data-testid="stMetric"] {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 12px 16px;
+    }
+    [data-testid="stMetric"] label {
+        font-size: 12px !important;
+        color: #6c757d !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .streamlit-expanderHeader { font-size: 14px; font-weight: 500; }
+    .stDataFrame { border-radius: 8px; overflow: hidden; }
+    hr { margin: 1.5rem 0; border-color: #e9ecef; }
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    }
+    [data-testid="stSidebar"] h1 { font-size: 20px !important; }
+    .badge {
+        display: inline-block; padding: 2px 10px; border-radius: 4px;
+        font-size: 12px; font-weight: 500; margin-right: 4px;
+    }
+    .badge-green  { background: #E1F5EE; color: #0F6E56; }
+    .badge-amber  { background: #FAEEDA; color: #854F0B; }
+    .badge-gray   { background: #F1EFE8; color: #5F5E5A; }
+    .badge-red    { background: #FCEBEB; color: #A32D2D; }
+    .badge-coral  { background: #FAECE7; color: #993C1D; }
+    .badge-purple { background: #EEEDFE; color: #534AB7; }
+    .badge-blue   { background: #E6F1FB; color: #185FA5; }
+</style>
+""", unsafe_allow_html=True)
+
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def badge(text: str, bg: str, fg: str) -> str:
-    return (
-        f'<span style="background:{bg};color:{fg};padding:2px 10px;'
-        f'border-radius:4px;font-size:12px;font-weight:500">{text}</span>'
-    )
+def badge(text: str, variant: str = "gray") -> str:
+    """Return a CSS-class badge span."""
+    return f'<span class="badge badge-{variant}">{text}</span>'
 
 
+def _variant(status: str) -> str:
+    """Map a status string to a badge variant."""
+    mapping = {
+        "Approved": "green", "Production": "green", "Ready": "green",
+        "Active": "green", "Achieved": "green", "On track": "green",
+        "Low": "green",
+        "Under review": "amber", "Staging": "amber", "Conditional": "amber",
+        "Conditionally ready": "amber", "At risk": "amber", "Escalated": "amber",
+        "Medium": "amber",
+        "Draft": "gray", "Development": "gray", "Pending": "gray", "Behind": "gray",
+        "Rejected": "red", "Deprecated": "red", "Blocked": "red",
+        "Expired": "red", "Not ready": "red", "read-only": "red",
+        "Restricted": "coral", "Critical": "coral", "High": "coral", "Suspended": "coral",
+        "Confidential": "purple",
+        "Internal": "blue", "recommend": "green", "act-with-approval": "amber",
+    }
+    return mapping.get(status, "gray")
+
+
+def sbadge(status: str) -> str:
+    return badge(status, _variant(status))
+
+
+# STATUS_COLORS kept for render_mermaid background colours
 STATUS_COLORS: dict[str, tuple[str, str]] = {
     "Approved": ("#E1F5EE", "#0F6E56"),
     "Production": ("#E1F5EE", "#0F6E56"),
     "Ready": ("#E1F5EE", "#0F6E56"),
-    "Active": ("#E1F5EE", "#0F6E56"),
-    "Achieved": ("#E1F5EE", "#0F6E56"),
-    "On track": ("#E1F5EE", "#0F6E56"),
-    "Under review": ("#FAEEDA", "#854F0B"),
-    "Staging": ("#FAEEDA", "#854F0B"),
     "Conditional": ("#FAEEDA", "#854F0B"),
     "Conditionally ready": ("#FAEEDA", "#854F0B"),
-    "At risk": ("#FAEEDA", "#854F0B"),
-    "Escalated": ("#FAEEDA", "#854F0B"),
-    "Draft": ("#F1EFE8", "#5F5E5A"),
-    "Development": ("#F1EFE8", "#5F5E5A"),
-    "Pending": ("#F1EFE8", "#5F5E5A"),
-    "Behind": ("#F1EFE8", "#5F5E5A"),
-    "Rejected": ("#FCEBEB", "#A32D2D"),
-    "Deprecated": ("#FCEBEB", "#A32D2D"),
     "Blocked": ("#FCEBEB", "#A32D2D"),
-    "Expired": ("#FCEBEB", "#A32D2D"),
-    "Not ready": ("#FCEBEB", "#A32D2D"),
-    "Restricted": ("#FAECE7", "#993C1D"),
-    "Critical": ("#FAECE7", "#993C1D"),
-    "High": ("#FAECE7", "#993C1D"),
-    "Suspended": ("#FAECE7", "#993C1D"),
-    "Confidential": ("#EEEDFE", "#534AB7"),
 }
-
-
-def sbadge(status: str) -> str:
-    bg, fg = STATUS_COLORS.get(status, ("#F1EFE8", "#5F5E5A"))
-    return badge(status, bg, fg)
 
 
 def render_mermaid(code: str, height: int = 520) -> None:
@@ -145,11 +183,22 @@ def load_approval_requests() -> list[ApprovalRequest]:
         return [ApprovalRequest.model_validate(r) for r in json.load(f)]
 
 
+@st.cache_data
+def load_token_usage() -> list[ModelTokenConsumption]:
+    p = os.path.join(BASE_DIR, "data", "token_usage.json")
+    if not os.path.isfile(p):
+        return []
+    with open(p, encoding="utf-8") as f:
+        return [ModelTokenConsumption.model_validate(r) for r in json.load(f)]
+
+
 products = load_products()
 ai_models = load_ai_models()
 users = load_users()
 api_keys = load_api_keys()
 approval_requests = load_approval_requests()
+token_usage_list = load_token_usage()
+token_map = {t.model_id: t for t in token_usage_list}
 
 if not products:
     st.error("Could not load data products. Run `python generate_data.py` first.")
@@ -168,17 +217,26 @@ user_map = {u.id: u for u in users}
 
 with st.sidebar:
     st.title("Data & AI Governance Platform")
-    st.caption(
-        "Enterprise data products and AI models — governed, documented, "
-        "ready for safe consumption."
-    )
+    st.caption("Demonstrating enterprise data product and AI model governance for industrial environments.")
     st.divider()
     with st.expander("About this platform"):
-        st.markdown(
-            "A portfolio project using **fully synthetic data**. "
-            "Demonstrates how a Collibra-style data catalogue and AI model registry "
-            "can be combined with data mesh principles and governance workflows."
-        )
+        st.markdown("""
+A portfolio project built to showcase product management, AI, and data governance knowledge.
+
+This project uses **fully synthetic data**. It does not contain real company data,
+proprietary architecture, internal system names, or confidential material.
+
+**What this demonstrates:**
+- Data product ownership and catalogue management
+- AI model governance, evaluation tracking, and OKRs
+- Data mesh architecture with federated domain ownership
+- AI-readiness scoring and data contract validation
+- Process mapping with data and AI model integration
+- Token consumption monitoring for generative AI models
+- Governance workflows: users, roles, approvals, API access
+
+Built by **Mayowa Togun** | [GitHub](https://github.com/TMayowa)
+        """)
     with st.expander("Platform stats"):
         active_keys = sum(1 for k in api_keys if k.status == "Active")
         st.metric("Data Products", len(products))
@@ -293,7 +351,7 @@ with tabs[0]:
         for lim in p.known_limitations:
             st.markdown(f"- {lim}")
         if p.tags:
-            tags_html = " ".join(badge(t, "#E6F1FB", "#185FA5") for t in p.tags)
+            tags_html = " ".join(badge(t, "blue") for t in p.tags)
             st.markdown(f"**Tags:** {tags_html}", unsafe_allow_html=True)
 
     with col_r:
@@ -456,6 +514,14 @@ with tabs[1]:
             ])
             st.dataframe(eval_df, use_container_width=True)
 
+        # Architecture diagram (Patch B)
+        arch = generate_model_architecture(m)
+        if arch:
+            st.divider()
+            st.markdown("#### Model Architecture")
+            render_mermaid(arch, height=560)
+            st.caption(architecture_caption(m))
+
         with st.expander("📄 View as JSON"):
             st.json(m.model_dump(mode="json"))
 
@@ -475,7 +541,7 @@ with tabs[2]:
         show_list = [(sel_a, ca), (sel_b, cb)]
     else:
         sel = st.selectbox("Select a product", list(product_map.keys()), key="read_sel")
-        show_list = [(sel, st)]
+        show_list = [(sel, st.container())]
 
     dim_display = {
         "ownership": "Ownership",
@@ -646,6 +712,97 @@ with tabs[4]:
             mc1.markdown(f"**{m.name}**")
             mc2.markdown(sbadge(m.status), unsafe_allow_html=True)
             mc3.markdown("✅ Meets quality req." if ok else f"⚠️ Below required {min_q}")
+
+    # Token consumption section (Patch A)
+    st.divider()
+    st.markdown("### Token Consumption")
+    st.caption("LLM token usage for generative AI models consuming the selected data product (Dec 2025 – May 2026).")
+
+    gen_consuming = [
+        m for m in ai_models
+        if p.id in m.input_data_products and m.id in token_map
+        and token_map[m.id].avg_tokens_per_request > 0
+    ]
+
+    non_gen_consuming = [
+        m for m in ai_models
+        if p.id in m.input_data_products and (
+            m.id not in token_map or token_map[m.id].avg_tokens_per_request == 0
+        )
+    ]
+
+    if not consuming:
+        st.info("No AI models consume this data product.")
+    elif not gen_consuming:
+        for m in non_gen_consuming:
+            st.info(
+                f"**{m.name}** is a non-generative model (based on {m.base_model or 'traditional ML'}). "
+                "Token consumption tracking does not apply. Compute costs are tracked through infrastructure monitoring."
+            )
+    else:
+        # Platform-wide summary
+        all_gen = [t for t in token_usage_list if t.avg_tokens_per_request > 0]
+        if all_gen:
+            total_tokens_last = sum(t.total_monthly_usage[-1].total_tokens for t in all_gen)
+            total_cost_last = sum(t.total_monthly_usage[-1].cost_usd for t in all_gen)
+            most_exp = max(all_gen, key=lambda t: t.total_monthly_usage[-1].cost_usd)
+            avg_cpr = sum(t.avg_cost_per_request_usd for t in all_gen) / len(all_gen)
+            t1, t2, t3, t4 = st.columns(4)
+            t1.metric("Total tokens (May, all models)", f"{total_tokens_last:,}")
+            t2.metric("Total cost (May, all models)", f"${total_cost_last:.2f}")
+            t3.metric("Most expensive model", most_exp.model_id.replace("-", " ").title().split()[-1])
+            t4.metric("Avg cost / request", f"${avg_cpr:.4f}")
+            st.divider()
+
+        for m in gen_consuming:
+            tu = token_map[m.id]
+            st.markdown(f"##### {m.name} — Token consumption (6 months)")
+
+            # Line chart: input vs output tokens
+            chart_df = pd.DataFrame([
+                {"month": u.month, "Input tokens": u.input_tokens, "Output tokens": u.output_tokens}
+                for u in tu.total_monthly_usage
+            ]).set_index("month")
+            st.area_chart(chart_df)
+
+            # Budget info
+            last_u = tu.total_monthly_usage[-1]
+            if tu.monthly_budget_usd:
+                util = last_u.cost_usd / tu.monthly_budget_usd * 100
+                bm1, bm2, bm3 = st.columns(3)
+                bm1.metric("Monthly budget", f"${tu.monthly_budget_usd:.0f}")
+                bm2.metric("May cost", f"${last_u.cost_usd:.3f}")
+                bm3.metric("Budget utilisation", f"{util:.1f}%")
+                if util > 95:
+                    st.error("Near or over budget")
+                elif util > 80:
+                    st.warning("Approaching budget limit")
+
+            # Sub-model breakdown for multi-model agents
+            if tu.is_multi_model and tu.sub_model_breakdown:
+                st.markdown(f"###### {m.name} — Sub-model breakdown")
+                sub_df = pd.DataFrame({
+                    sub.sub_model_name: [u.total_tokens for u in sub.monthly_usage]
+                    for sub in tu.sub_model_breakdown
+                }, index=[u.month for u in tu.sub_model_breakdown[0].monthly_usage])
+                st.bar_chart(sub_df)
+
+                sub_table = pd.DataFrame([
+                    {
+                        "Sub-model": sub.sub_model_name,
+                        "Role": sub.role,
+                        "Tokens (May)": f"{sub.monthly_usage[-1].total_tokens:,}",
+                        "Cost (May)": f"${sub.monthly_usage[-1].cost_usd:.4f}",
+                    }
+                    for sub in tu.sub_model_breakdown
+                ])
+                st.table(sub_table)
+
+        for m in non_gen_consuming:
+            st.info(
+                f"**{m.name}** is a non-generative model ({m.base_model or 'traditional ML'}). "
+                "Token consumption tracking does not apply."
+            )
 
 # ════════════════════════════════════════════════════════════════════════════
 # TAB 6 — Lineage
@@ -826,7 +983,6 @@ with tabs[7]:
 # ── Footer ────────────────────────────────────────────────────────────────────────────
 st.divider()
 st.caption(
-    "This platform uses fully synthetic data for portfolio demonstration purposes. "
-    "Built by Mayowa Togun. "
-    "[View source on GitHub](https://github.com/TMayowa/ai-ready-data-product-registry)"
+    "A portfolio project built to showcase product management, AI, and data governance knowledge. "
+    "Built with synthetic data by Mayowa Togun."
 )

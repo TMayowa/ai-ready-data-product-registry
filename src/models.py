@@ -301,9 +301,51 @@ class ApprovalRequest(BaseModel):
     approval_level_required: Literal["Domain Lead", "Governance Lead", "Platform Admin"]
 
 
+# ── Token Consumption Models ───────────────────────────────────────────────────
+
+
+class TokenUsage(BaseModel):
+    """Monthly token consumption record for a generative AI model."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    month: str                      # e.g. "2026-01", "2026-02"
+    input_tokens: int
+    output_tokens: int
+    total_tokens: int
+    cost_usd: float
+    requests: int
+
+
+class SubModelUsage(BaseModel):
+    """Token usage for a sub-model within a multi-model agent."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    sub_model_name: str             # e.g. "Claude 3.5 Haiku (scanner)"
+    role: str                       # e.g. "Signal scanning", "Risk synthesis"
+    monthly_usage: list[TokenUsage]
+
+
+class ModelTokenConsumption(BaseModel):
+    """Complete token consumption profile for an AI model."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    model_id: str
+    is_multi_model: bool
+    total_monthly_usage: list[TokenUsage]
+    sub_model_breakdown: list[SubModelUsage]
+    avg_tokens_per_request: int
+    avg_cost_per_request_usd: float
+    monthly_budget_usd: float | None = None
+    budget_utilisation_pct: float | None = None
+
+
 __all__ = [
     "QualityRule", "LineageNode", "AIUsagePolicy", "DataContract", "DataProduct",
     "LineageLayer", "AutonomyLevel", "Domain", "Classification", "RefreshFrequency",
     "ModelEvaluation", "ModelOKR", "AIModel",
     "User", "APIKey", "ApprovalRequest",
+    "TokenUsage", "SubModelUsage", "ModelTokenConsumption",
 ]

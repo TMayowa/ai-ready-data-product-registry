@@ -1,0 +1,574 @@
+[
+  {
+    "model_id": "supplier-risk-agent",
+    "is_multi_model": true,
+    "total_monthly_usage": [
+      {
+        "month": "2025-12",
+        "input_tokens": 255674,
+        "output_tokens": 71770,
+        "total_tokens": 327444,
+        "cost_usd": 0.7238,
+        "requests": 3975
+      },
+      {
+        "month": "2026-01",
+        "input_tokens": 263087,
+        "output_tokens": 73460,
+        "total_tokens": 336547,
+        "cost_usd": 0.7439,
+        "requests": 4156
+      },
+      {
+        "month": "2026-02",
+        "input_tokens": 267744,
+        "output_tokens": 73922,
+        "total_tokens": 341666,
+        "cost_usd": 0.7553,
+        "requests": 3861
+      },
+      {
+        "month": "2026-03",
+        "input_tokens": 291352,
+        "output_tokens": 85452,
+        "total_tokens": 376804,
+        "cost_usd": 0.8539,
+        "requests": 3951
+      },
+      {
+        "month": "2026-04",
+        "input_tokens": 275746,
+        "output_tokens": 86139,
+        "total_tokens": 361885,
+        "cost_usd": 0.8129,
+        "requests": 4040
+      },
+      {
+        "month": "2026-05",
+        "input_tokens": 285120,
+        "output_tokens": 87111,
+        "total_tokens": 372231,
+        "cost_usd": 0.8863,
+        "requests": 4026
+      }
+    ],
+    "sub_model_breakdown": [
+      {
+        "sub_model_name": "Claude 3.5 Haiku",
+        "role": "Signal scanning & filtering",
+        "monthly_usage": [
+          {
+            "month": "2025-12",
+            "input_tokens": 194526,
+            "output_tokens": 42530,
+            "total_tokens": 237056,
+            "cost_usd": 0.1018,
+            "requests": 3975
+          },
+          {
+            "month": "2026-01",
+            "input_tokens": 200837,
+            "output_tokens": 43269,
+            "total_tokens": 244106,
+            "cost_usd": 0.1043,
+            "requests": 4156
+          },
+          {
+            "month": "2026-02",
+            "input_tokens": 198705,
+            "output_tokens": 44387,
+            "total_tokens": 243092,
+            "cost_usd": 0.1052,
+            "requests": 3861
+          },
+          {
+            "month": "2026-03",
+            "input_tokens": 217026,
+            "output_tokens": 51282,
+            "total_tokens": 268308,
+            "cost_usd": 0.1184,
+            "requests": 3951
+          },
+          {
+            "month": "2026-04",
+            "input_tokens": 205631,
+            "output_tokens": 53887,
+            "total_tokens": 259518,
+            "cost_usd": 0.1188,
+            "requests": 4040
+          },
+          {
+            "month": "2026-05",
+            "input_tokens": 215018,
+            "output_tokens": 49776,
+            "total_tokens": 264794,
+            "cost_usd": 0.116,
+            "requests": 4026
+          }
+        ]
+      },
+      {
+        "sub_model_name": "Claude 3.5 Sonnet",
+        "role": "Risk synthesis & recommendation",
+        "monthly_usage": [
+          {
+            "month": "2025-12",
+            "input_tokens": 61148,
+            "output_tokens": 29240,
+            "total_tokens": 90388,
+            "cost_usd": 0.622,
+            "requests": 441
+          },
+          {
+            "month": "2026-01",
+            "input_tokens": 62250,
+            "output_tokens": 30191,
+            "total_tokens": 92441,
+            "cost_usd": 0.6396,
+            "requests": 413
+          },
+          {
+            "month": "2026-02",
+            "input_tokens": 69039,
+            "output_tokens": 29535,
+            "total_tokens": 98574,
+            "cost_usd": 0.6501,
+            "requests": 457
+          },
+          {
+            "month": "2026-03",
+            "input_tokens": 74326,
+            "output_tokens": 34170,
+            "total_tokens": 108496,
+            "cost_usd": 0.7355,
+            "requests": 455
+          },
+          {
+            "month": "2026-04",
+            "input_tokens": 70115,
+            "output_tokens": 32252,
+            "total_tokens": 102367,
+            "cost_usd": 0.6941,
+            "requests": 440
+          },
+          {
+            "month": "2026-05",
+            "input_tokens": 70102,
+            "output_tokens": 37335,
+            "total_tokens": 107437,
+            "cost_usd": 0.7703,
+            "requests": 498
+          }
+        ]
+      }
+    ],
+    "avg_tokens_per_request": 1400,
+    "avg_cost_per_request_usd": 0.012,
+    "monthly_budget_usd": 150.0,
+    "budget_utilisation_pct": 0.6
+  },
+  {
+    "model_id": "contract-insights-assistant",
+    "is_multi_model": false,
+    "total_monthly_usage": [
+      {
+        "month": "2025-12",
+        "input_tokens": 90711,
+        "output_tokens": 20567,
+        "total_tokens": 111278,
+        "cost_usd": 0.0484,
+        "requests": 1671
+      },
+      {
+        "month": "2026-01",
+        "input_tokens": 103011,
+        "output_tokens": 23859,
+        "total_tokens": 126870,
+        "cost_usd": 0.0556,
+        "requests": 1856
+      },
+      {
+        "month": "2026-02",
+        "input_tokens": 103966,
+        "output_tokens": 27126,
+        "total_tokens": 131092,
+        "cost_usd": 0.0599,
+        "requests": 2021
+      },
+      {
+        "month": "2026-03",
+        "input_tokens": 139277,
+        "output_tokens": 34237,
+        "total_tokens": 173514,
+        "cost_usd": 0.0776,
+        "requests": 2771
+      },
+      {
+        "month": "2026-04",
+        "input_tokens": 100191,
+        "output_tokens": 25773,
+        "total_tokens": 125964,
+        "cost_usd": 0.0573,
+        "requests": 1952
+      },
+      {
+        "month": "2026-05",
+        "input_tokens": 94307,
+        "output_tokens": 22009,
+        "total_tokens": 116316,
+        "cost_usd": 0.0511,
+        "requests": 2096
+      }
+    ],
+    "sub_model_breakdown": [],
+    "avg_tokens_per_request": 850,
+    "avg_cost_per_request_usd": 0.004,
+    "monthly_budget_usd": 50.0,
+    "budget_utilisation_pct": 0.1
+  },
+  {
+    "model_id": "logistics-disruption-agent",
+    "is_multi_model": true,
+    "total_monthly_usage": [
+      {
+        "month": "2025-12",
+        "input_tokens": 63761,
+        "output_tokens": 19749,
+        "total_tokens": 83510,
+        "cost_usd": 0.213,
+        "requests": 200
+      },
+      {
+        "month": "2026-01",
+        "input_tokens": 68373,
+        "output_tokens": 23832,
+        "total_tokens": 92205,
+        "cost_usd": 0.244,
+        "requests": 250
+      },
+      {
+        "month": "2026-02",
+        "input_tokens": 81223,
+        "output_tokens": 28961,
+        "total_tokens": 110184,
+        "cost_usd": 0.3015,
+        "requests": 320
+      },
+      {
+        "month": "2026-03",
+        "input_tokens": 82998,
+        "output_tokens": 30140,
+        "total_tokens": 113138,
+        "cost_usd": 0.3291,
+        "requests": 400
+      },
+      {
+        "month": "2026-04",
+        "input_tokens": 98336,
+        "output_tokens": 33943,
+        "total_tokens": 132279,
+        "cost_usd": 0.3745,
+        "requests": 500
+      },
+      {
+        "month": "2026-05",
+        "input_tokens": 114690,
+        "output_tokens": 39898,
+        "total_tokens": 154588,
+        "cost_usd": 0.4356,
+        "requests": 600
+      }
+    ],
+    "sub_model_breakdown": [
+      {
+        "sub_model_name": "Claude 3.5 Haiku",
+        "role": "Event monitoring & classification",
+        "monthly_usage": [
+          {
+            "month": "2025-12",
+            "input_tokens": 42819,
+            "output_tokens": 11401,
+            "total_tokens": 54220,
+            "cost_usd": 0.025,
+            "requests": 204
+          },
+          {
+            "month": "2026-01",
+            "input_tokens": 42819,
+            "output_tokens": 14612,
+            "total_tokens": 57431,
+            "cost_usd": 0.029,
+            "requests": 235
+          },
+          {
+            "month": "2026-02",
+            "input_tokens": 51034,
+            "output_tokens": 17177,
+            "total_tokens": 68211,
+            "cost_usd": 0.0342,
+            "requests": 342
+          },
+          {
+            "month": "2026-03",
+            "input_tokens": 51525,
+            "output_tokens": 16745,
+            "total_tokens": 68270,
+            "cost_usd": 0.0338,
+            "requests": 379
+          },
+          {
+            "month": "2026-04",
+            "input_tokens": 61377,
+            "output_tokens": 18978,
+            "total_tokens": 80355,
+            "cost_usd": 0.0391,
+            "requests": 517
+          },
+          {
+            "month": "2026-05",
+            "input_tokens": 71686,
+            "output_tokens": 22529,
+            "total_tokens": 94215,
+            "cost_usd": 0.0461,
+            "requests": 583
+          }
+        ]
+      },
+      {
+        "sub_model_name": "Claude 3.5 Sonnet",
+        "role": "Disruption prediction & contingency",
+        "monthly_usage": [
+          {
+            "month": "2025-12",
+            "input_tokens": 20942,
+            "output_tokens": 8348,
+            "total_tokens": 29290,
+            "cost_usd": 0.188,
+            "requests": 95
+          },
+          {
+            "month": "2026-01",
+            "input_tokens": 25554,
+            "output_tokens": 9220,
+            "total_tokens": 34774,
+            "cost_usd": 0.215,
+            "requests": 126
+          },
+          {
+            "month": "2026-02",
+            "input_tokens": 30189,
+            "output_tokens": 11784,
+            "total_tokens": 41973,
+            "cost_usd": 0.2673,
+            "requests": 155
+          },
+          {
+            "month": "2026-03",
+            "input_tokens": 31473,
+            "output_tokens": 13395,
+            "total_tokens": 44868,
+            "cost_usd": 0.2953,
+            "requests": 215
+          },
+          {
+            "month": "2026-04",
+            "input_tokens": 36959,
+            "output_tokens": 14965,
+            "total_tokens": 51924,
+            "cost_usd": 0.3354,
+            "requests": 235
+          },
+          {
+            "month": "2026-05",
+            "input_tokens": 43004,
+            "output_tokens": 17369,
+            "total_tokens": 60373,
+            "cost_usd": 0.3895,
+            "requests": 312
+          }
+        ]
+      }
+    ],
+    "avg_tokens_per_request": 1800,
+    "avg_cost_per_request_usd": 0.015,
+    "monthly_budget_usd": 80.0,
+    "budget_utilisation_pct": 0.5
+  },
+  {
+    "model_id": "inventory-planning-assistant",
+    "is_multi_model": false,
+    "total_monthly_usage": [
+      {
+        "month": "2025-12",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-01",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-02",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-03",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-04",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-05",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      }
+    ],
+    "sub_model_breakdown": [],
+    "avg_tokens_per_request": 0,
+    "avg_cost_per_request_usd": 0.0,
+    "monthly_budget_usd": null,
+    "budget_utilisation_pct": null
+  },
+  {
+    "model_id": "maintenance-planning-agent",
+    "is_multi_model": false,
+    "total_monthly_usage": [
+      {
+        "month": "2025-12",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-01",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-02",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-03",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-04",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-05",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      }
+    ],
+    "sub_model_breakdown": [],
+    "avg_tokens_per_request": 0,
+    "avg_cost_per_request_usd": 0.0,
+    "monthly_budget_usd": null,
+    "budget_utilisation_pct": null
+  },
+  {
+    "model_id": "procurement-anomaly-detector",
+    "is_multi_model": false,
+    "total_monthly_usage": [
+      {
+        "month": "2025-12",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-01",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-02",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-03",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-04",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      },
+      {
+        "month": "2026-05",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost_usd": 0.0,
+        "requests": 0
+      }
+    ],
+    "sub_model_breakdown": [],
+    "avg_tokens_per_request": 0,
+    "avg_cost_per_request_usd": 0.0,
+    "monthly_budget_usd": null,
+    "budget_utilisation_pct": null
+  }
+]
