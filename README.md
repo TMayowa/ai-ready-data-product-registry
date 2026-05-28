@@ -1,7 +1,6 @@
-# Data & Governance Portfolio Lab
+# Background and the idea behind this
 
-##Background and the idea behind this
-I built this as a non-conventional way to show my knowledge and what I have worked with in my current and previous roles. It is difficult to show knowledge and contribution as a product manager especially in a highly regulated environment. This static/mock up app was built by me using THE FOLLOWING
+I built this as a non-conventional way to show my knowledge and what I have worked with in my current and previous roles. It is difficult to show knowledge and contribution as a product manager especially in a highly regulated environment. This static/mock up app was built by me using the following:
 - A detailed documentation of my knowledge
 - Chatgpt to structure the knowledge
 - A detailed documentation of prompts
