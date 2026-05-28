@@ -1,4 +1,4 @@
-"""AI-Ready Data & AI Governance Platform — Streamlit application (v2).
+﻿"""AI-Ready Data & AI Governance Platform â€” Streamlit application (v2).
 
 8-tab governance platform combining data product catalogue, AI model registry,
 readiness scoring, contract validation, lineage visualisation, and governance workflows.
@@ -31,17 +31,17 @@ from src.readiness_score import (
     score_all_dimensions,
 )
 
-# ── Page config ──────────────────────────────────────────────────────────────
+# â”€â”€ Page config â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 st.set_page_config(
     page_title="AI-Ready Data Product Registry",
     layout="wide",
-    page_icon="🏗️",
+    page_icon="ðŸ—ï¸",
 )
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-# ── CSS ───────────────────────────────────────────────────────────────────────
+# â”€â”€ CSS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 st.markdown("""
 <style>
     .block-container { padding-top: 2rem; padding-bottom: 1rem; }
@@ -81,7 +81,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def badge(text: str, variant: str = "gray") -> str:
     """Return a CSS-class badge span."""
@@ -152,7 +152,7 @@ def render_mermaid(code: str, height: int = 520) -> None:
     components.html(html, height=height, scrolling=True)
 
 
-# ── Data loading ──────────────────────────────────────────────────────────────
+# â”€â”€ Data loading â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 @st.cache_data
 def load_products() -> list[DataProduct]:
@@ -229,7 +229,7 @@ model_map = {m.name: m for m in ai_models}
 model_id_map = {m.id: m for m in ai_models}
 user_map = {u.id: u for u in users}
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
+# â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 with st.sidebar:
     st.title("Data & AI Governance Platform")
@@ -263,7 +263,7 @@ Built by **Mayowa Togun** | [GitHub](https://github.com/TMayowa)
         "[View on GitHub](https://github.com/TMayowa/ai-ready-data-product-registry)"
     )
 
-# ── Global banner ─────────────────────────────────────────────────────────────
+# â”€â”€ Global banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 st.title("AI-Ready Data Product Registry")
 st.caption(
@@ -281,27 +281,27 @@ g2.metric("AI Models", len(ai_models), f"{in_prod} in Production")
 g3.metric("Avg Readiness Score", f"{avg_score:.1f}")
 g4.metric(
     "Pending Approvals", pending_count,
-    delta="⚠ Needs attention" if pending_count > 0 else "All clear",
+    delta="âš  Needs attention" if pending_count > 0 else "All clear",
     delta_color="inverse" if pending_count > 0 else "off",
 )
 st.divider()
 
-# ── Tabs ──────────────────────────────────────────────────────────────────────
+# â”€â”€ Tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 tabs = st.tabs([
-    "📦 Data Catalogue",
-    "🤖 AI Model Registry",
-    "📊 Readiness Scores",
-    "📋 Data Contracts",
-    "🔍 AI Consumption",
-    "🔗 Lineage",
-    "🏗️ Governance",
-    "🗺️ Process Maps",
+    "ðŸ“¦ Data Catalogue",
+    "ðŸ¤– AI Model Registry",
+    "ðŸ“Š Readiness Scores",
+    "ðŸ“‹ Data Contracts",
+    "ðŸ” AI Consumption",
+    "ðŸ”— Lineage",
+    "ðŸ—ï¸ Governance",
+    "ðŸ—ºï¸ Process Maps",
 ])
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 1 — Data Catalogue
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 1 â€” Data Catalogue
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[0]:
     ready_count = sum(1 for s in product_statuses.values() if s in ("Ready", "Conditionally ready"))
     domain_avgs: dict[str, list[float]] = {}
@@ -314,7 +314,7 @@ with tabs[0]:
     c1.metric("Total Products", len(products))
     c2.metric("Avg Readiness Score", f"{avg_score:.1f}")
     c3.metric("Ready for AI", ready_count)
-    c4.metric("Most Accessed", most_accessed.name.split()[0] + "…")
+    c4.metric("Most Accessed", most_accessed.name.split()[0] + "â€¦")
 
     st.divider()
     st.markdown("### Product Catalogue")
@@ -374,7 +374,7 @@ with tabs[0]:
         st.markdown("#### Ownership")
         st.markdown(f"**Business Owner:** {p.business_owner}")
         st.markdown(f"**Technical Owner:** {p.technical_owner}")
-        st.markdown(f"**Data Steward:** {p.data_steward if p.data_steward else '⚠️ _Not assigned_'}")
+        st.markdown(f"**Data Steward:** {p.data_steward if p.data_steward else 'âš ï¸ _Not assigned_'}")
         if p.domain_owner_team:
             st.markdown(f"**Domain Team:** {p.domain_owner_team}")
         st.divider()
@@ -405,14 +405,14 @@ with tabs[0]:
         st.dataframe(pd.DataFrame(p.schema_fields), use_container_width=True)
 
     st.divider()
-    with st.expander("📄 View as JSON"):
+    with st.expander("ðŸ“„ View as JSON"):
         st.json(p.model_dump(mode="json"))
-    with st.expander("📎 Data product schema"):
+    with st.expander("ðŸ“Ž Data product schema"):
         st.json(DataProduct.model_json_schema())
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 2 — AI Model Registry
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 2 â€” AI Model Registry
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[1]:
     if not ai_models:
         st.info("No AI models. Run `python generate_ai_models.py` first.")
@@ -450,7 +450,7 @@ with tabs[1]:
         st.divider()
         sel_m = st.selectbox("Select a model for full details", list(model_map.keys()), key="ai_sel")
         m = model_map[sel_m]
-        st.markdown(f"**{m.name}** — v{m.version}")
+        st.markdown(f"**{m.name}** â€” v{m.version}")
         st.markdown(m.description)
 
         col_left, col_right = st.columns(2)
@@ -482,10 +482,10 @@ with tabs[1]:
                 s4.metric("Error Rate", f"{m.error_rate_pct}%")
             st.markdown("#### Allowed Actions")
             for a in m.allowed_actions:
-                st.markdown(f"✅ {a}")
+                st.markdown(f"âœ… {a}")
             st.markdown("#### Prohibited Actions")
             for a in m.prohibited_actions:
-                st.markdown(f"🚫 {a}")
+                st.markdown(f"ðŸš« {a}")
             st.markdown("#### Human Oversight")
             for h in m.human_oversight_required:
                 st.markdown(f"- {h}")
@@ -499,7 +499,7 @@ with tabs[1]:
                 min_score = m.minimum_data_quality_score or 0
                 ok = dp_score >= min_score
                 st.markdown(
-                    f"{'\u2705' if ok else '⚠️'} **{dp.name}** — Score: **{dp_score:.1f}** "
+                    f"{'\u2705' if ok else 'âš ï¸'} **{dp.name}** â€” Score: **{dp_score:.1f}** "
                     f"{'(meets min)' if ok else f'(below required {min_score})'}"
                 )
 
@@ -511,7 +511,7 @@ with tabs[1]:
                 oc.markdown(f"**{okr.objective}**")
                 os_.markdown(sbadge(okr.status), unsafe_allow_html=True)
                 st.progress(okr.progress_pct / 100)
-                st.caption(f"{okr.progress_pct}% · {okr.quarter}")
+                st.caption(f"{okr.progress_pct}% Â· {okr.quarter}")
                 for kr in okr.key_results:
                     st.markdown(f"  - {kr}")
 
@@ -521,11 +521,11 @@ with tabs[1]:
             le = m.evaluations[-1]
             st.markdown(
                 f"**Latest:** {'\u2705' if le.passed else '\u274c'} "
-                f"{le.eval_type} — Score **{le.score:.0f}** ({le.eval_date})"
+                f"{le.eval_type} â€” Score **{le.score:.0f}** ({le.eval_date})"
             )
             eval_df = pd.DataFrame([
                 {"Date": e.eval_date, "Type": e.eval_type, "Score": e.score,
-                 "Passed": "✅" if e.passed else "❌", "Notes": e.notes, "By": e.evaluated_by}
+                 "Passed": "âœ…" if e.passed else "âŒ", "Notes": e.notes, "By": e.evaluated_by}
                 for e in m.evaluations
             ])
             st.dataframe(eval_df, use_container_width=True)
@@ -538,12 +538,12 @@ with tabs[1]:
             render_mermaid(arch, height=560)
             st.caption(architecture_caption(m))
 
-        with st.expander("📄 View as JSON"):
+        with st.expander("ðŸ“„ View as JSON"):
             st.json(m.model_dump(mode="json"))
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 3 — Readiness Scores
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 3 â€” Readiness Scores
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[2]:
     compare_mode = st.checkbox("Compare two products side by side")
 
@@ -600,7 +600,7 @@ with tabs[2]:
                 for g in gap_list:
                     st.markdown(f"- {g}")
             else:
-                st.success("No gaps — all dimensions fully addressed.")
+                st.success("No gaps â€” all dimensions fully addressed.")
             # AI consumer impact
             dependent = [m for m in ai_models if p.id in m.input_data_products]
             if dependent:
@@ -610,13 +610,13 @@ with tabs[2]:
                     min_q = m.minimum_data_quality_score or 0
                     ok = sc >= min_q
                     st.markdown(
-                        f"{'\u2705' if ok else '⚠️'} **{m.name}** requires {min_q} — "
+                        f"{'\u2705' if ok else 'âš ï¸'} **{m.name}** requires {min_q} â€” "
                         f"current {sc:.1f} ({'OK' if ok else 'BELOW REQUIREMENT'})"
                     )
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 4 — Data Contracts
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 4 â€” Data Contracts
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[3]:
     sel = st.selectbox("Select a product", list(product_map.keys()), key="con_sel")
     p = product_map[sel]
@@ -627,8 +627,8 @@ with tabs[3]:
     with c1:
         st.markdown(f"**Version:** {dc.contract_version}")
         st.markdown(f"**Last Reviewed:** {dc.last_reviewed}")
-        st.markdown(f"**Freshness SLA:** {dc.freshness_sla or '⚠️ _Not defined_'}")
-        st.markdown(f"**Escalation Contact:** {dc.escalation_contact or '⚠️ _Not defined_'}")
+        st.markdown(f"**Freshness SLA:** {dc.freshness_sla or 'âš ï¸ _Not defined_'}")
+        st.markdown(f"**Escalation Contact:** {dc.escalation_contact or 'âš ï¸ _Not defined_'}")
         st.markdown("**Consumers:**")
         for c in dc.consumers:
             st.markdown(f"- {c}")
@@ -672,12 +672,12 @@ with tabs[3]:
             st.warning(w)
 
     st.divider()
-    with st.expander("📄 View contract as JSON"):
+    with st.expander("ðŸ“„ View contract as JSON"):
         st.json(dc.model_dump(mode="json"))
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 5 — AI Consumption
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 5 â€” AI Consumption
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[4]:
     st.markdown("### Can an AI agent use this data product?")
     sel = st.selectbox("Select a product", list(product_map.keys()), key="ai_con_sel")
@@ -692,11 +692,11 @@ with tabs[4]:
     with col_l:
         st.markdown("#### Permitted Actions")
         for a in summary["permitted_actions"]:
-            st.markdown(f"✅ {a}")
+            st.markdown(f"âœ… {a}")
     with col_r:
         st.markdown("#### Prohibited Actions")
         for a in summary["prohibited_actions"]:
-            st.markdown(f"🚫 {a}")
+            st.markdown(f"ðŸš« {a}")
     st.divider()
     if summary["conditions"]:
         st.markdown("#### Conditions for Use")
@@ -727,12 +727,12 @@ with tabs[4]:
             mc1, mc2, mc3 = st.columns([3, 2, 2])
             mc1.markdown(f"**{m.name}**")
             mc2.markdown(sbadge(m.status), unsafe_allow_html=True)
-            mc3.markdown("✅ Meets quality req." if ok else f"⚠️ Below required {min_q}")
+            mc3.markdown("âœ… Meets quality req." if ok else f"âš ï¸ Below required {min_q}")
 
     # Token consumption section (Patch A)
     st.divider()
     st.markdown("### Token Consumption")
-    st.caption("LLM token usage for generative AI models consuming the selected data product (Dec 2025 – May 2026).")
+    st.caption("LLM token usage for generative AI models consuming the selected data product (Dec 2025 â€“ May 2026).")
 
     gen_consuming = [
         m for m in ai_models
@@ -772,7 +772,7 @@ with tabs[4]:
 
         for m in gen_consuming:
             tu = token_map[m.id]
-            st.markdown(f"##### {m.name} — Token consumption (6 months)")
+            st.markdown(f"##### {m.name} â€” Token consumption (6 months)")
 
             # Line chart: input vs output tokens
             chart_df = pd.DataFrame([
@@ -796,7 +796,7 @@ with tabs[4]:
 
             # Sub-model breakdown for multi-model agents
             if tu.is_multi_model and tu.sub_model_breakdown:
-                st.markdown(f"###### {m.name} — Sub-model breakdown")
+                st.markdown(f"###### {m.name} â€” Sub-model breakdown")
                 sub_df = pd.DataFrame({
                     sub.sub_model_name: [u.total_tokens for u in sub.monthly_usage]
                     for sub in tu.sub_model_breakdown
@@ -820,9 +820,9 @@ with tabs[4]:
                 "Token consumption tracking does not apply."
             )
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 6 — Lineage
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 6 â€” Lineage
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[5]:
     view_type = st.selectbox(
         "View",
@@ -858,9 +858,9 @@ with tabs[5]:
         else:
             render_mermaid(generate_maintenance_process_map(), height=600)
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 7 — Governance
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 7 â€” Governance
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[6]:
     # Governance health
     if products and users:
@@ -877,10 +877,10 @@ with tabs[6]:
             col.metric(label, f"{mesh[key]['score']}/100")
             if mesh[key]["gaps"]:
                 for g in mesh[key]["gaps"]:
-                    col.caption(f"⚠ {g}")
+                    col.caption(f"âš  {g}")
 
     st.divider()
-    with st.expander("🗺️ Data mesh architecture diagram"):
+    with st.expander("ðŸ—ºï¸ Data mesh architecture diagram"):
         render_mermaid(generate_mesh_diagram(), height=700)
 
     st.divider()
@@ -897,8 +897,8 @@ with tabs[6]:
             )
             user_rows.append({
                 "Name": u.name, "Role": u.role, "Department": u.department,
-                "Domain": u.domain or "—", "Access": u.access_level,
-                "Can Approve": perms or "—",
+                "Domain": u.domain or "â€”", "Access": u.access_level,
+                "Can Approve": perms or "â€”",
             })
         st.write(pd.DataFrame(user_rows).to_html(index=False, escape=False), unsafe_allow_html=True)
     else:
@@ -916,7 +916,7 @@ with tabs[6]:
             key_rows.append({
                 "Key": k.masked_key, "Resource": k.resource_id,
                 "Issued To": name, "Status": sbadge(k.status),
-                "Scope": k.scope, "Expires": k.expires_date, "Last Used": k.last_used or "—",
+                "Scope": k.scope, "Expires": k.expires_date, "Last Used": k.last_used or "â€”",
             })
         st.write(pd.DataFrame(key_rows).to_html(index=False, escape=False), unsafe_allow_html=True)
 
@@ -926,7 +926,7 @@ with tabs[6]:
             for k in active_k:
                 issued_to = user_map[k.issued_to].name if k.issued_to in user_map else k.issued_to
                 issued_by = user_map[k.issued_by].name if k.issued_by in user_map else k.issued_by
-                with st.expander(f"{k.masked_key} — {k.resource_id}"):
+                with st.expander(f"{k.masked_key} â€” {k.resource_id}"):
                     st.markdown(f"**Key:** `{k.masked_key}`  |  **Scope:** {k.scope}  |  **Rate:** {k.rate_limit}")
                     st.markdown(f"**Issued to:** {issued_to}  |  **By:** {issued_by}")
                     st.markdown(f"**Issued:** {k.issued_date}  |  **Expires:** {k.expires_date}  |  **Last used:** {k.last_used or 'Never'}")
@@ -950,10 +950,10 @@ with tabs[6]:
     if approval_requests:
         pending_reqs = [r for r in approval_requests if r.status == "Pending"]
         if pending_reqs:
-            st.warning(f"⚠️ {len(pending_reqs)} pending request(s) require attention")
+            st.warning(f"âš ï¸ {len(pending_reqs)} pending request(s) require attention")
             for r in pending_reqs:
                 req_by = user_map[r.requested_by].name if r.requested_by in user_map else r.requested_by
-                st.markdown(f"- **{r.resource_name}** — by {req_by} on {r.requested_date} (needs: {r.approval_level_required})")
+                st.markdown(f"- **{r.resource_name}** â€” by {req_by} on {r.requested_date} (needs: {r.approval_level_required})")
 
         st.divider()
         req_rows = []
@@ -962,19 +962,19 @@ with tabs[6]:
             rev_by = user_map.get(r.reviewed_by or "")
             req_rows.append({
                 "Type": r.request_type,
-                "Resource": r.resource_name[:45] + ("…" if len(r.resource_name) > 45 else ""),
+                "Resource": r.resource_name[:45] + ("â€¦" if len(r.resource_name) > 45 else ""),
                 "Requested By": req_by.name if req_by else r.requested_by,
                 "Date": r.requested_date,
                 "Status": sbadge(r.status),
-                "Reviewed By": rev_by.name if rev_by else "—",
+                "Reviewed By": rev_by.name if rev_by else "â€”",
             })
         st.write(pd.DataFrame(req_rows).to_html(index=False, escape=False), unsafe_allow_html=True)
     else:
         st.info("No approval requests. Run `python generate_users.py` first.")
 
-# ════════════════════════════════════════════════════════════════════════════
-# TAB 8 — Process Maps
-# ════════════════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+# TAB 8 â€” Process Maps
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 with tabs[7]:
     proc_sel = st.selectbox(
         "Select a process",
@@ -995,7 +995,7 @@ with tabs[7]:
             {"Data Product": "Supplier Performance Summary", "Step": "Supplier selection / Review", "Role": "Performance scores"},
             {"Data Product": "Contract Spend History", "Step": "Purchase order / Invoice", "Role": "Contract & spend data"},
         ]))
-        st.markdown("_🟩 Data products (teal) | 🟣 AI models (purple) | Dashed arrows = non-blocking contribution_")
+        st.markdown("_ðŸŸ© Data products (teal) | ðŸŸ£ AI models (purple) | Dashed arrows = non-blocking contribution_")
     else:
         st.markdown("### Maintenance & Reliability Process Map")
         render_mermaid(generate_maintenance_process_map(products, ai_models), height=550)
@@ -1003,13 +1003,14 @@ with tabs[7]:
         mpa = model_map.get("Maintenance Planning Agent")
         st.markdown(
             f"**1 data product** (Maintenance Work Order History) and **1 AI model** "
-            f"(Maintenance Planning Agent — {mpa.status if mpa else 'N/A'})."
+            f"(Maintenance Planning Agent â€” {mpa.status if mpa else 'N/A'})."
         )
-        st.markdown("⚠️ All AI outputs for safety-critical equipment require human review before action.")
+        st.markdown("âš ï¸ All AI outputs for safety-critical equipment require human review before action.")
 
-# ── Footer ────────────────────────────────────────────────────────────────────────────
+# â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 st.divider()
 st.caption(
     "A portfolio project built to showcase product management, AI, and data governance knowledge. "
     "Built with synthetic data by Mayowa Togun."
 )
+
