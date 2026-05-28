@@ -402,7 +402,7 @@ with tabs[0]:
     if p.schema_fields:
         st.divider()
         st.markdown("#### Schema")
-        st.dataframe(pd.DataFrame(p.schema_fields), width=None)
+        st.dataframe(pd.DataFrame(p.schema_fields), use_container_width=True)
 
     st.divider()
     with st.expander("📄 View as JSON"):
@@ -528,7 +528,7 @@ with tabs[1]:
                  "Passed": "✅" if e.passed else "❌", "Notes": e.notes, "By": e.evaluated_by}
                 for e in m.evaluations
             ])
-            st.dataframe(eval_df, width=None)
+            st.dataframe(eval_df, use_container_width=True)
 
         # Architecture diagram (Patch B)
         arch = generate_model_architecture(m)
