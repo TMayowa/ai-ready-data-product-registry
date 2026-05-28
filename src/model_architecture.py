@@ -12,18 +12,19 @@ _DIAGRAMS: dict[str, str] = {
 
 "supplier-risk-agent": """graph TD
     subgraph input_layer["Input sources"]
-        D1["Supplier Performance Summary<br/><small>data product</small>"]
-        D2["Contract Spend History<br/><small>data product</small>"]
-        D3["External risk signals<br/><small>news, geopolitical</small>"]
+        D1["Supplier Performance Summary"]
+        D2["Contract Spend History"]
+        D3["External risk signals"]
     end
     subgraph agent_orchestration["LangGraph orchestration"]
         direction TB
-        ROUTER["Router<br/><small>classifies incoming signal type</small>"]
+        ROUTER["Router<br/>classifies signal type"]
+        DISCARD["Discard - logged"]
         subgraph scanning["Signal scanning"]
-            SCAN["Scanner agent<br/><small>Claude 3.5 Haiku</small><br/><small>High volume, low cost</small>"]
+            SCAN["Scanner agent<br/>Claude 3.5 Haiku<br/>High volume, low cost"]
         end
         subgraph analysis["Risk analysis"]
-            SYNTH["Synthesis agent<br/><small>Claude 3.5 Sonnet</small><br/><small>Deep reasoning</small>"]
+            SYNTH["Synthesis agent<br/>Claude 3.5 Sonnet<br/>Deep reasoning"]
         end
         subgraph controls["Governance controls"]
             CONF["Confidence check"]
@@ -32,7 +33,7 @@ _DIAGRAMS: dict[str, str] = {
         end
     end
     subgraph output_layer["Outputs"]
-        REC["Risk assessment + recommendations"]
+        REC["Risk assessment and recommendations"]
         DASH["Dashboard alert"]
         HUM["Human review queue"]
     end
@@ -40,11 +41,11 @@ _DIAGRAMS: dict[str, str] = {
     D2 --> ROUTER
     D3 --> ROUTER
     ROUTER --> SCAN
-    SCAN -->|"risk signal detected"| SYNTH
-    SCAN -->|"no risk"| DISCARD["Discard<br/><small>logged</small>"]
+    SCAN -->|risk signal| SYNTH
+    SCAN -->|no risk| DISCARD
     SYNTH --> CONF
-    CONF -->|"confidence >= 80%"| TRACE
-    CONF -->|"confidence < 80%"| ESC
+    CONF -->|high confidence| TRACE
+    CONF -->|low confidence| ESC
     TRACE --> REC
     TRACE --> DASH
     ESC --> HUM
@@ -57,14 +58,15 @@ _DIAGRAMS: dict[str, str] = {
 
 "contract-insights-assistant": """graph TD
     subgraph input["Input"]
-        D1["Contract Spend History<br/><small>data product</small>"]
-        Q["User query<br/><small>natural language</small>"]
+        D1["Contract Spend History"]
+        Q["User query"]
     end
     subgraph processing["Processing pipeline"]
         direction TB
-        CTX["Context assembly<br/><small>retrieve relevant contracts,<br/>spend records, terms</small>"]
-        LLM["Claude 3.5 Haiku<br/><small>analyse, summarise,<br/>surface insights</small>"]
-        VAL["Output validation<br/><small>check for hallucination,<br/>verify against source</small>"]
+        CTX["Context assembly<br/>retrieve relevant contracts,<br/>spend records, terms"]
+        LLM["Claude 3.5 Haiku<br/>analyse, summarise,<br/>surface insights"]
+        VAL["Output validation<br/>check for hallucination,<br/>verify against source"]
+        REJ["Rejected - flagged for review"]
     end
     subgraph output["Output"]
         INS["Contract insight report"]
@@ -74,25 +76,25 @@ _DIAGRAMS: dict[str, str] = {
     Q --> CTX
     CTX --> LLM
     LLM --> VAL
-    VAL -->|"validated"| INS
-    VAL -->|"sources attached"| SRC
-    VAL -->|"validation failed"| REJ["Rejected<br/><small>flagged for review</small>"]
+    VAL -->|validated| INS
+    VAL -->|sources attached| SRC
+    VAL -->|validation failed| REJ
     style input fill:#E6F1FB,stroke:#185FA5
     style processing fill:#EEEDFE,stroke:#534AB7
     style output fill:#E1F5EE,stroke:#0F6E56""",
 
 "logistics-disruption-agent": """graph TD
     subgraph input["Input sources"]
-        D1["Logistics Delay Events<br/><small>data product</small>"]
-        D2["Inventory Availability Snapshot<br/><small>data product</small>"]
-        W["Weather API<br/><small>Met.no</small>"]
-        V["Vessel AIS<br/><small>tracking</small>"]
+        D1["Logistics Delay Events"]
+        D2["Inventory Availability Snapshot"]
+        W["Weather API - Met.no"]
+        V["Vessel AIS tracking"]
     end
     subgraph agent["LangGraph orchestration"]
         direction TB
-        MON["Monitor agent<br/><small>Claude 3.5 Haiku</small><br/><small>event classification</small>"]
-        PRED["Prediction agent<br/><small>Claude 3.5 Sonnet</small><br/><small>disruption probability,<br/>delay estimation</small>"]
-        CONT["Contingency agent<br/><small>Claude 3.5 Sonnet</small><br/><small>alternative routing,<br/>resource reallocation</small>"]
+        MON["Monitor agent<br/>Claude 3.5 Haiku<br/>event classification"]
+        PRED["Prediction agent<br/>Claude 3.5 Sonnet<br/>disruption probability"]
+        CONT["Contingency agent<br/>Claude 3.5 Sonnet<br/>alternative routing"]
         subgraph safety["Safety gate"]
             CHECK["Safety-critical check"]
         end
@@ -100,18 +102,18 @@ _DIAGRAMS: dict[str, str] = {
     subgraph output["Outputs"]
         ALERT["Disruption alert"]
         PLAN["Contingency plan"]
-        ESC["Safety escalation<br/><small>human required</small>"]
+        ESC["Safety escalation - human required"]
     end
     D1 --> MON
     W --> MON
     V --> MON
-    MON -->|"disruption likely"| PRED
+    MON -->|disruption likely| PRED
     PRED --> CONT
     D2 --> CONT
     CONT --> CHECK
-    CHECK -->|"not safety-critical"| ALERT
-    CHECK -->|"not safety-critical"| PLAN
-    CHECK -->|"safety-critical"| ESC
+    CHECK -->|standard| ALERT
+    CHECK -->|standard| PLAN
+    CHECK -->|safety critical| ESC
     style input fill:#E6F1FB,stroke:#185FA5
     style agent fill:#FAFAFA,stroke:#5F5E5A
     style safety fill:#FAECE7,stroke:#993C1D
@@ -119,17 +121,17 @@ _DIAGRAMS: dict[str, str] = {
 
 "inventory-planning-assistant": """graph TD
     subgraph input["Input"]
-        D1["Inventory Availability Snapshot<br/><small>data product</small>"]
+        D1["Inventory Availability Snapshot"]
     end
     subgraph feature_eng["Feature engineering"]
-        F1["Consumption history<br/><small>rolling averages</small>"]
-        F2["Seasonal patterns<br/><small>monthly, quarterly</small>"]
-        F3["Lead time features<br/><small>supplier delivery</small>"]
-        F4["Criticality weighting<br/><small>spare part class</small>"]
+        F1["Consumption history<br/>rolling averages"]
+        F2["Seasonal patterns<br/>monthly, quarterly"]
+        F3["Lead time features<br/>supplier delivery"]
+        F4["Criticality weighting<br/>spare part class"]
     end
     subgraph model["Model"]
-        XGB["XGBoost<br/><small>demand forecast</small>"]
-        RULES["Business rules<br/><small>safety stock floors,<br/>reorder constraints</small>"]
+        XGB["XGBoost<br/>demand forecast"]
+        RULES["Business rules<br/>safety stock, reorder constraints"]
     end
     subgraph output["Output"]
         FORE["Demand forecast"]
@@ -155,22 +157,22 @@ _DIAGRAMS: dict[str, str] = {
 
 "maintenance-planning-agent": """graph TD
     subgraph input["Input sources"]
-        D1["Maintenance Work Order History<br/><small>data product</small>"]
-        IOT["IoT sensor readings<br/><small>vibration, temperature, pressure</small>"]
+        D1["Maintenance Work Order History"]
+        IOT["IoT sensor readings<br/>vibration, temperature, pressure"]
         INSP["Inspection records"]
     end
     subgraph feature["Feature extraction"]
-        TS["Time-series features<br/><small>sensor trends, rolling stats</small>"]
-        WO["Work order features<br/><small>failure codes, intervals, costs</small>"]
-        EQ["Equipment profile<br/><small>age, class, criticality</small>"]
+        TS["Time-series features<br/>sensor trends, rolling stats"]
+        WO["Work order features<br/>failure codes, intervals, costs"]
+        EQ["Equipment profile<br/>age, class, criticality"]
     end
     subgraph ensemble["Ensemble model"]
-        LSTM["LSTM<br/><small>temporal patterns in sensor data</small>"]
-        RF["Random Forest<br/><small>failure probability from work order history</small>"]
-        COMB["Ensemble combiner<br/><small>weighted average</small>"]
+        LSTM["LSTM<br/>temporal patterns in sensor data"]
+        RF["Random Forest<br/>failure probability from work order history"]
+        COMB["Ensemble combiner<br/>weighted average"]
     end
-    subgraph safety_gate["Safety gate — ALL outputs reviewed"]
-        REV["Mandatory human review<br/><small>for safety-critical equipment</small>"]
+    subgraph safety_gate["Safety gate - ALL outputs reviewed"]
+        REV["Mandatory human review<br/>for safety-critical equipment"]
     end
     subgraph output["Output"]
         PRED["Failure prediction"]
@@ -197,16 +199,16 @@ _DIAGRAMS: dict[str, str] = {
 
 "procurement-anomaly-detector": """graph TD
     subgraph input["Input"]
-        D1["Supplier Performance Summary<br/><small>data product</small>"]
-        D2["Contract Spend History<br/><small>data product</small>"]
+        D1["Supplier Performance Summary"]
+        D2["Contract Spend History"]
     end
     subgraph preprocessing["Preprocessing"]
-        JOIN["Join supplier + spend records"]
-        FEAT["Feature extraction<br/><small>spend deviation, frequency,<br/>vendor patterns, timing</small>"]
+        JOIN["Join supplier and spend records"]
+        FEAT["Feature extraction<br/>spend deviation, frequency,<br/>vendor patterns, timing"]
     end
     subgraph model["Detection model"]
-        ISO["Isolation Forest<br/><small>unsupervised anomaly scoring</small>"]
-        FILT["Rule-based filters<br/><small>duplicate POs, round-number invoices,<br/>split orders</small>"]
+        ISO["Isolation Forest<br/>unsupervised anomaly scoring"]
+        FILT["Rule-based filters<br/>duplicate POs, round-number invoices"]
     end
     subgraph output["Output"]
         SCORE["Anomaly score"]

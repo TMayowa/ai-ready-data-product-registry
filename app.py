@@ -123,14 +123,23 @@ STATUS_COLORS: dict[str, tuple[str, str]] = {
 
 
 def render_mermaid(code: str, height: int = 520) -> None:
-    """Render a Mermaid diagram via the CDN (no extra dependencies required)."""
+    """Render a Mermaid diagram via the CDN.
+
+    Uses startOnLoad:false + explicit mermaid.run() with a timeout so diagrams
+    render correctly on first load inside Streamlit tab iframes.
+    """
     html = f"""
     <div style="background:#fff;padding:16px;border-radius:8px;overflow:auto">
-      <pre class="mermaid">{code}</pre>
+      <div class="mermaid">{code}</div>
     </div>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({{startOnLoad:true,theme:'neutral',flowchart:{{useMaxWidth:true,htmlLabels:true}}}});
+      mermaid.initialize({{
+        startOnLoad: false,
+        theme: 'neutral',
+        flowchart: {{ useMaxWidth: true, htmlLabels: true }}
+      }});
+      setTimeout(() => mermaid.run(), 150);
     </script>
     """
     components.html(html, height=height, scrolling=True)
