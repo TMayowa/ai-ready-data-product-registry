@@ -530,14 +530,6 @@ with tabs[1]:
             ])
             st.dataframe(eval_df, use_container_width=True)
 
-        # Architecture diagram (Patch B)
-        arch = generate_model_architecture(m)
-        if arch:
-            st.divider()
-            st.markdown("#### Model Architecture")
-            render_mermaid(arch, height=560)
-            st.caption(architecture_caption(m))
-
         with st.expander("📄 View as JSON"):
             st.json(m.model_dump(mode="json"))
 
