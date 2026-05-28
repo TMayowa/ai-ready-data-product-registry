@@ -125,13 +125,13 @@ STATUS_COLORS: dict[str, tuple[str, str]] = {
 def render_mermaid(code: str, height: int = 520) -> None:
     """Render a Mermaid diagram via the CDN.
 
-    Uses startOnLoad:false + explicit mermaid.run() with a timeout so diagrams
-    render correctly on first load inside Streamlit tab iframes.
+    Stores the diagram source in a <script type="text/plain"> tag so the browser
+    does NOT HTML-parse it (preserving <br/> and other chars). Then uses
+    mermaid.render() to generate SVG programmatically.
     """
     html = f"""
-    <div style="background:#fff;padding:16px;border-radius:8px;overflow:auto">
-      <div class="mermaid">{code}</div>
-    </div>
+    <div id="mermaid-out" style="background:#fff;padding:12px;border-radius:8px;min-height:80px;overflow:auto"></div>
+    <script id="mermaid-src" type="text/plain">{code}</script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
       mermaid.initialize({{
@@ -139,7 +139,14 @@ def render_mermaid(code: str, height: int = 520) -> None:
         theme: 'neutral',
         flowchart: {{ useMaxWidth: true, htmlLabels: true }}
       }});
-      setTimeout(() => mermaid.run(), 150);
+      const src = document.getElementById('mermaid-src').textContent;
+      const out = document.getElementById('mermaid-out');
+      try {{
+        const {{ svg }} = await mermaid.render('diagram', src);
+        out.innerHTML = svg;
+      }} catch(e) {{
+        out.innerHTML = '<pre style="color:red;font-size:12px">Diagram render error: ' + e.message + '</pre>';
+      }}
     </script>
     """
     components.html(html, height=height, scrolling=True)
@@ -395,7 +402,7 @@ with tabs[0]:
     if p.schema_fields:
         st.divider()
         st.markdown("#### Schema")
-        st.dataframe(pd.DataFrame(p.schema_fields), use_container_width=True)
+        st.dataframe(pd.DataFrame(p.schema_fields), width=None)
 
     st.divider()
     with st.expander("📄 View as JSON"):
@@ -521,7 +528,7 @@ with tabs[1]:
                  "Passed": "✅" if e.passed else "❌", "Notes": e.notes, "By": e.evaluated_by}
                 for e in m.evaluations
             ])
-            st.dataframe(eval_df, use_container_width=True)
+            st.dataframe(eval_df, width=None)
 
         # Architecture diagram (Patch B)
         arch = generate_model_architecture(m)
@@ -819,25 +826,34 @@ with tabs[4]:
 with tabs[5]:
     view_type = st.selectbox(
         "View",
-        ["Product lineage", "Data mesh architecture", "Process maps"],
+        ["-- Select a view --", "Product lineage", "Data mesh architecture", "Process maps"],
         key="lineage_view",
     )
-    if view_type == "Product lineage":
-        sel = st.selectbox("Select a product", list(product_map.keys()), key="lin_sel")
-        p = product_map[sel]
-        st.markdown(f"### Lineage: {p.name}")
-        render_mermaid(generate_mermaid(p))
-        st.divider()
-        st.table(pd.DataFrame(
-            [{"System": n.system_name, "Layer": n.layer, "Description": n.description}
-             for n in p.lineage]
-        ))
+    if view_type == "-- Select a view --":
+        st.info("Select a view from the dropdown above to display a diagram.")
+    elif view_type == "Product lineage":
+        prod_opts = ["-- Select a product --"] + list(product_map.keys())
+        sel = st.selectbox("Select a product", prod_opts, key="lin_sel")
+        if sel == "-- Select a product --":
+            st.info("Select a data product to view its lineage diagram.")
+        else:
+            p = product_map[sel]
+            st.markdown(f"### Lineage: {p.name}")
+            render_mermaid(generate_mermaid(p))
+            st.divider()
+            st.table(pd.DataFrame(
+                [{"System": n.system_name, "Layer": n.layer, "Description": n.description}
+                 for n in p.lineage]
+            ))
     elif view_type == "Data mesh architecture":
         st.markdown("### Data Mesh Architecture")
         render_mermaid(generate_mesh_diagram(), height=700)
     else:
-        proc = st.selectbox("Select a process", ["Procure-to-Pay", "Maintenance & Reliability"], key="lin_proc")
-        if proc == "Procure-to-Pay":
+        proc_opts = ["-- Select a process --", "Procure-to-Pay", "Maintenance & Reliability"]
+        proc = st.selectbox("Select a process", proc_opts, key="lin_proc")
+        if proc == "-- Select a process --":
+            st.info("Select a process to view its map.")
+        elif proc == "Procure-to-Pay":
             render_mermaid(generate_p2p_process_map(), height=600)
         else:
             render_mermaid(generate_maintenance_process_map(), height=600)
@@ -962,10 +978,12 @@ with tabs[6]:
 with tabs[7]:
     proc_sel = st.selectbox(
         "Select a process",
-        ["Procure-to-Pay", "Maintenance & Reliability"],
+        ["-- Select a process --", "Procure-to-Pay", "Maintenance & Reliability"],
         key="proc_sel",
     )
-    if proc_sel == "Procure-to-Pay":
+    if proc_sel == "-- Select a process --":
+        st.info("Select a process from the dropdown above to display its map.")
+    elif proc_sel == "Procure-to-Pay":
         st.markdown("### Procure-to-Pay Process Map")
         render_mermaid(generate_p2p_process_map(products, ai_models), height=600)
         st.divider()
