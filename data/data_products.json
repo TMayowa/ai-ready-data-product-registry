@@ -4,9 +4,9 @@
     "name": "Supplier Performance Summary",
     "domain": "Procurement",
     "description": "Aggregated supplier performance data including delivery precision, quality compliance, safety record, and responsiveness metrics. Enables trend analysis, benchmarking across supplier tiers, and early risk flagging for procurement managers and AI agents.",
-    "business_owner": "Tonje Thorsen",
-    "technical_owner": "Bente Eriksen-Bøe",
-    "data_steward": "Thor Thomassen",
+    "business_owner": "Dr. Alf Iversen",
+    "technical_owner": "Alf Simonsen",
+    "data_steward": "Gerd Eriksen-Ellingsen",
     "source_systems": [
       "SAP S/4HANA",
       "Supplier Portal"
@@ -48,7 +48,7 @@
     ],
     "data_contract": {
       "contract_version": "v2.1",
-      "last_reviewed": "2026-04-22",
+      "last_reviewed": "2025-12-29",
       "consumers": [
         "Procurement Management",
         "Category Managers"
@@ -103,14 +103,14 @@
         ],
         "max_autonomy_level": "recommend"
       },
-      "escalation_contact": "procurement.governance@equinor.no"
+      "escalation_contact": "procurement.governance@energycomp.com"
     },
     "known_limitations": [
       "does not include sub-tier supplier data",
       "performance scores lag by 1 business day"
     ],
-    "created_date": "2024-08-22",
-    "last_updated": "2025-11-23",
+    "created_date": "2024-09-29",
+    "last_updated": "2026-08-05",
     "record_count": 12400,
     "size_mb": 45.2,
     "schema_fields": [
@@ -196,8 +196,8 @@
     "name": "Contract Spend History",
     "domain": "Contract Management",
     "description": "Historical spend data across all active contracts including commitment tracking, actual vs. forecast comparisons, and vendor-level spend aggregation. Supports spend pattern analysis and anomaly detection by human analysts and AI assistants.",
-    "business_owner": "Sara Vik-Jakobsen",
-    "technical_owner": "Dr. Johannes Gulbrandsen",
+    "business_owner": "Einar Sandvik",
+    "technical_owner": "Malin Edvardsen",
     "data_steward": "",
     "source_systems": [
       "SAP S/4HANA",
@@ -288,14 +288,14 @@
         ],
         "max_autonomy_level": "read-only"
       },
-      "escalation_contact": "contract.governance@equinor.no"
+      "escalation_contact": "contract.governance@energycomp.com"
     },
     "known_limitations": [
       "historical data before 2020 may have inconsistent currency conversion",
       "multi-year framework agreements not fully decomposed"
     ],
-    "created_date": "2024-02-18",
-    "last_updated": "2025-02-07",
+    "created_date": "2024-01-10",
+    "last_updated": "2026-02-15",
     "record_count": 87000,
     "size_mb": 312.7,
     "schema_fields": null,
@@ -333,9 +333,9 @@
     "name": "Logistics Delay Events",
     "domain": "Offshore Logistics",
     "description": "Real-time and historical logistics delay events for offshore operations including vessel delays, weather-related disruptions, and root cause data. Supports operations dashboards and AI-driven delay pattern analysis and ETA prediction.",
-    "business_owner": "Siri-Berit Berg",
-    "technical_owner": "Cecilie Nguyen",
-    "data_steward": "Kristoffer Sæther",
+    "business_owner": "Turid Mathisen",
+    "technical_owner": "Kjetil Dahl",
+    "data_steward": "Stig Antonsen",
     "source_systems": [
       "Logistics Management System",
       "Vessel Tracking",
@@ -378,7 +378,7 @@
     ],
     "data_contract": {
       "contract_version": "v1.3",
-      "last_reviewed": "2026-06-18",
+      "last_reviewed": "2026-11-30",
       "consumers": [
         "Offshore Operations",
         "Supply Chain"
@@ -440,14 +440,14 @@
         ],
         "max_autonomy_level": "recommend"
       },
-      "escalation_contact": "logistics.ops@equinor.no"
+      "escalation_contact": "logistics.ops@energycomp.com"
     },
     "known_limitations": [
       "weather correlation is best-effort and may lag 2 hours",
       "root cause coding depends on manual operator input — approximately 15% of events have unclassified root cause"
     ],
-    "created_date": "2023-01-13",
-    "last_updated": "2025-04-04",
+    "created_date": "2024-05-11",
+    "last_updated": "2025-01-01",
     "record_count": 34200,
     "size_mb": 28.9,
     "schema_fields": null,
@@ -485,8 +485,8 @@
     "name": "Inventory Availability Snapshot",
     "domain": "Materials Management",
     "description": "Daily snapshot of inventory positions across all warehouses including stock quantities, reorder points, and critical item flags. Enables stock-level forecasting, consumption trend analysis, and planning support.",
-    "business_owner": "Morten Jørgensen",
-    "technical_owner": "Malin Hagen",
+    "business_owner": "Tone Henriksen",
+    "technical_owner": "Camilla Madsen",
     "data_steward": "",
     "source_systems": [
       "SAP MM",
@@ -529,7 +529,7 @@
     ],
     "data_contract": {
       "contract_version": "v1.2",
-      "last_reviewed": "2025-12-15",
+      "last_reviewed": "2026-07-09",
       "consumers": [
         "Materials Management",
         "Planning"
@@ -593,8 +593,8 @@
       "does not capture in-transit inventory in real time",
       "consignment stock not fully reflected"
     ],
-    "created_date": "2023-06-07",
-    "last_updated": "2025-02-24",
+    "created_date": "2023-02-13",
+    "last_updated": "2025-08-17",
     "record_count": 156000,
     "size_mb": 89.4,
     "schema_fields": null,
@@ -631,9 +631,9 @@
     "name": "Maintenance Work Order History",
     "domain": "Operations",
     "description": "Historical maintenance work orders with equipment linkage, failure coding, IoT sensor context, and completion details. Supports reliability dashboards, predictive maintenance indicators, and backlog prioritisation.",
-    "business_owner": "Trine Jensen",
-    "technical_owner": "Reidun Sandvik",
-    "data_steward": "Siv Gulbrandsen",
+    "business_owner": "Odd Lund",
+    "technical_owner": "Synnøve Berntsen",
+    "data_steward": "Dr. Tom Karlsen",
     "source_systems": [
       "SAP PM",
       "Inspection Database",
@@ -641,7 +641,7 @@
     ],
     "classification": "Restricted",
     "refresh_frequency": "Daily",
-    "documentation_url": "https://docs.internal.equinor.com/data/maintenance-history",
+    "documentation_url": "https://docs.internal.energycomp.com/data/maintenance-history",
     "lineage": [
       {
         "system_name": "SAP PM + Inspections + IoT Sensors",
@@ -671,7 +671,7 @@
     ],
     "data_contract": {
       "contract_version": "v2.0",
-      "last_reviewed": "2026-09-11",
+      "last_reviewed": "2025-10-21",
       "consumers": [
         "Maintenance Engineering",
         "Operations"
@@ -732,15 +732,15 @@
         ],
         "max_autonomy_level": "read-only"
       },
-      "escalation_contact": "maintenance.governance@equinor.no"
+      "escalation_contact": "maintenance.governance@energycomp.com"
     },
     "known_limitations": [
       "IoT sensor coverage is 60% of monitored assets",
       "historical work orders before 2019 have incomplete failure coding",
       "lineage documentation incomplete — transformation layer not documented"
     ],
-    "created_date": "2024-03-17",
-    "last_updated": "2025-06-06",
+    "created_date": "2024-08-24",
+    "last_updated": "2026-07-17",
     "record_count": 245000,
     "size_mb": 567.3,
     "schema_fields": null,

@@ -61,7 +61,7 @@
     "status": "Rejected",
     "reviewed_by": "USR-003",
     "review_date": "2026-03-05",
-    "review_notes": "Rejected: requester does not have the required data access training certification for Restricted classification data products. Resubmit after completing EQUINOR-DATA-201 and EQUINOR-AI-101 training modules.",
+    "review_notes": "Rejected: requester does not have the required data access training certification for Restricted classification data products. Resubmit after completing EC-DATA-201 and EC-AI-101 training modules.",
     "approval_level_required": "Domain Lead"
   },
   {

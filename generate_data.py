@@ -142,7 +142,7 @@ def _generate_products() -> list[DataProduct]:
                     ],
                     max_autonomy_level="recommend",
                 ),
-                escalation_contact="procurement.governance@equinor.no",
+                escalation_contact="procurement.governance@energycomp.com",
             ),
             known_limitations=[
                 "does not include sub-tier supplier data",
@@ -281,7 +281,7 @@ def _generate_products() -> list[DataProduct]:
                     ],
                     max_autonomy_level="read-only",
                 ),
-                escalation_contact="contract.governance@equinor.no",
+                escalation_contact="contract.governance@energycomp.com",
             ),
             known_limitations=[
                 "historical data before 2020 may have inconsistent currency conversion",
@@ -422,7 +422,7 @@ def _generate_products() -> list[DataProduct]:
                     ],
                     max_autonomy_level="recommend",
                 ),
-                escalation_contact="logistics.ops@equinor.no",
+                escalation_contact="logistics.ops@energycomp.com",
             ),
             known_limitations=[
                 "weather correlation is best-effort and may lag 2 hours",
@@ -608,7 +608,7 @@ def _generate_products() -> list[DataProduct]:
             source_systems=["SAP PM", "Inspection Database", "IoT Sensor Platform"],
             classification="Restricted",
             refresh_frequency="Daily",
-            documentation_url="https://docs.internal.equinor.com/data/maintenance-history",
+            documentation_url="https://docs.internal.energycomp.com/data/maintenance-history",
             lineage=[
                 LineageNode(
                     system_name="SAP PM + Inspections + IoT Sensors",
@@ -695,7 +695,7 @@ def _generate_products() -> list[DataProduct]:
                     ],
                     max_autonomy_level="read-only",
                 ),
-                escalation_contact="maintenance.governance@equinor.no",
+                escalation_contact="maintenance.governance@energycomp.com",
             ),
             known_limitations=[
                 "IoT sensor coverage is 60% of monitored assets",

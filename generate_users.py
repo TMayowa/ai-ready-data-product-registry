@@ -13,39 +13,39 @@ fake = Faker(["no_NO"])
 def _generate_users() -> list[User]:
     names = [fake.name() for _ in range(10)]
     return [
-        User(id="USR-001", name=names[0], email=f"{names[0].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-001", name=names[0], email=f"{names[0].lower().replace(' ', '.')}@energycomp.com",
              role="Platform Admin", department="Data Platform Engineering",
              access_level="Admin", can_approve_data_products=True,
              can_approve_ai_models=True, can_generate_api_keys=True),
-        User(id="USR-002", name=names[1], email=f"{names[1].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-002", name=names[1], email=f"{names[1].lower().replace(' ', '.')}@energycomp.com",
              role="Domain Lead", department="Procurement & Supply Chain",
              domain="Procurement", access_level="Approver",
              can_approve_data_products=True, can_approve_ai_models=True),
-        User(id="USR-003", name=names[2], email=f"{names[2].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-003", name=names[2], email=f"{names[2].lower().replace(' ', '.')}@energycomp.com",
              role="Domain Lead", department="Operations & Maintenance",
              domain="Operations", access_level="Approver",
              can_approve_data_products=True, can_approve_ai_models=True),
-        User(id="USR-004", name=names[3], email=f"{names[3].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-004", name=names[3], email=f"{names[3].lower().replace(' ', '.')}@energycomp.com",
              role="Data Product Owner", department="Procurement Performance & Analytics",
              domain="Procurement", access_level="Contributor",
              can_approve_data_products=True),
-        User(id="USR-005", name=names[4], email=f"{names[4].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-005", name=names[4], email=f"{names[4].lower().replace(' ', '.')}@energycomp.com",
              role="Data Steward", department="Contract Management & Commercial",
              domain="Contract Management", access_level="Contributor"),
-        User(id="USR-006", name=names[5], email=f"{names[5].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-006", name=names[5], email=f"{names[5].lower().replace(' ', '.')}@energycomp.com",
              role="AI Model Owner", department="Supply Chain AI & Analytics",
              access_level="Contributor", can_approve_ai_models=True),
-        User(id="USR-007", name=names[6], email=f"{names[6].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-007", name=names[6], email=f"{names[6].lower().replace(' ', '.')}@energycomp.com",
              role="Governance Lead", department="Data Governance & Compliance",
              access_level="Approver", can_approve_data_products=True,
              can_approve_ai_models=True, can_generate_api_keys=True),
-        User(id="USR-008", name=names[7], email=f"{names[7].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-008", name=names[7], email=f"{names[7].lower().replace(' ', '.')}@energycomp.com",
              role="Data Consumer", department="Category Management",
              domain="Procurement", access_level="Viewer"),
-        User(id="USR-009", name=names[8], email=f"{names[8].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-009", name=names[8], email=f"{names[8].lower().replace(' ', '.')}@energycomp.com",
              role="Data Consumer", department="Offshore Logistics",
              domain="Offshore Logistics", access_level="Viewer"),
-        User(id="USR-010", name=names[9], email=f"{names[9].lower().replace(' ', '.')}@equinor.no",
+        User(id="USR-010", name=names[9], email=f"{names[9].lower().replace(' ', '.')}@energycomp.com",
              role="AI Consumer", department="Asset Integrity & Reliability Engineering",
              domain="Operations", access_level="Viewer"),
     ]
@@ -144,8 +144,8 @@ def _generate_approval_requests(users: list[User]) -> list[ApprovalRequest]:
             reviewed_by="USR-003", review_date="2026-03-05",
             review_notes=(
                 "Rejected: requester does not have the required data access training certification "
-                "for Restricted classification data products. Resubmit after completing EQUINOR-DATA-201 "
-                "and EQUINOR-AI-101 training modules."
+                "for Restricted classification data products. Resubmit after completing EC-DATA-201 "
+                "and EC-AI-101 training modules."
             ),
             approval_level_required="Domain Lead",
         ),
