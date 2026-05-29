@@ -11,6 +11,7 @@ Live demo - [AI-ready data product registry](https://mayowa-togun-ai-data-pdmgt-
 ## Why I built this
 I built this project to make my data product, AI governance and enterprise architecture thinking visible outside my day-to-day work. As a product leader in a regulated industrial environment, much of my contribution sits in decisions, processes, governance structures, stakeholder alignment and product trade-offs that are difficult to show in a traditional GitHub repository.
 This application demonstrates how I think about the foundation layer required for AI at scale: governed data products, clear ownership, data contracts, lineage, quality expectations, AI usage policies, model risk controls and human-in-the-loop approval workflows.
+
 The examples are inspired by my experience working across procurement, offshore logistics and contract management in an industrial energy context. All data, scenarios, structures and users in this project are fully synthetic and fictional. The project does not contain real company data, proprietary architecture, internal system names, operational records or confidential material.
 
 ## What this demonstrates
