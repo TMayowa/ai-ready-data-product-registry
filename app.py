@@ -289,6 +289,7 @@ st.divider()
 # ── Tabs ──────────────────────────────────────────────────────────────────────
 
 tabs = st.tabs([
+    "🪧 Start Here"
     "📦 Data Catalogue",
     "🤖 AI Model Registry",
     "📊 Readiness Scores",
@@ -300,9 +301,121 @@ tabs = st.tabs([
 ])
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 1 — Data Catalogue
+# TAB 1 — Start Here
 # ════════════════════════════════════════════════════════════════════════════
+
 with tabs[0]:
+
+    st.warning(
+        "⚠️ **This project uses fully synthetic data.** "
+        "It does not contain real company data, proprietary architecture, "
+        "internal system names, operational records, or confidential material."
+    )
+
+    st.title("Start here")
+    st.caption(
+        "A portfolio project showcasing my knowledge of enterprise data product governance, "
+        "AI model management, and data mesh architecture. "
+        "I designed the frameworks and logic; AI tools handled the code."
+    )
+
+    st.divider()
+
+    st.markdown(
+        "This is a portfolio prototype demonstrating how enterprise data products and AI models "
+        "can be structured, documented, and governed so they are safe for analytics and AI-agent "
+        "consumption in industrial environments."
+    )
+    st.markdown(
+        "**The core idea:** AI agents should not consume enterprise data unless the data product has "
+        "clear ownership, quality expectations, lineage, usage rules, autonomy limits, and human-review triggers."
+    )
+
+    st.divider()
+
+    st.subheader("Recommended 5-minute walkthrough")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown(
+            """
+            **1. Data Catalogue** — Inspect a data product's ownership,
+            metadata, quality rules, lineage, consumers, and limitations.
+
+            **2. Readiness Scores** — See how each data product is scored
+            across eight AI-readiness dimensions.
+
+            **3. Data Contracts** — Review how quality rules, required metadata,
+            AI consumers, and escalation rules are structured.
+            """
+        )
+
+    with col2:
+        st.markdown(
+            """
+            **4. AI Consumption** — Answer: *Can an AI agent use this
+            data product, and under what conditions?*
+
+            **5. Lineage** — Trace data from source systems through
+            transformations to AI consumers.
+
+            **6. AI Model Registry** — Inspect model dependencies, evaluations,
+            OKRs, risk classification, and autonomy controls.
+            """
+        )
+
+    st.divider()
+
+    st.subheader("What this demonstrates")
+
+    d1, d2, d3 = st.columns(3)
+
+    with d1:
+        st.markdown("**Data governance**")
+        st.caption(
+            "Data product ownership, AI-readiness scoring, "
+            "data contract design, lineage modelling, data mesh architecture."
+        )
+
+    with d2:
+        st.markdown("**AI model governance**")
+        st.caption(
+            "Model registry, risk classification, evaluation tracking, "
+            "OKRs, autonomy controls, human-in-the-loop approvals."
+        )
+
+    with d3:
+        st.markdown("**Product & technical skills**")
+        st.caption(
+            "Product requirements, architecture documentation, "
+            "hands-on prototyping with Python, Streamlit, Pydantic, and Mermaid."
+        )
+
+    st.divider()
+
+    st.subheader("Go deeper")
+    st.markdown(
+        "📄 **[README](https://github.com/TMayowa/ai-ready-data-product-registry/blob/main/README.md)** "
+        "— Architecture decisions, full build story, and project structure."
+    )
+    st.markdown(
+        "📋 **[Prompt engineering build log](https://github.com/TMayowa/ai-ready-data-product-registry/blob/main/prompt-engineering-build-log.md)** "
+        "— Every prompt, design decision, and verification step documented."
+    )
+    st.markdown(
+        "📐 **[Technical architecture document](https://github.com/TMayowa/ai-ready-data-product-registry/blob/main/technical-architecture-document.md)** "
+        "— Data models, scoring framework, governance design, and tradeoffs."
+    )
+    st.markdown(
+        "📝 **[PRD](https://github.com/TMayowa/ai-ready-data-product-registry/blob/main/PRD.md)** "
+        "— Product requirements document."
+    )
+
+# ════════════════════════════════════════════════════════════════════════════
+# TAB 2 — Data Catalogue
+# ════════════════════════════════════════════════════════════════════════════
+with tabs[1]:
     ready_count = sum(1 for s in product_statuses.values() if s in ("Ready", "Conditionally ready"))
     domain_avgs: dict[str, list[float]] = {}
     for p in products:
@@ -411,9 +524,9 @@ with tabs[0]:
         st.json(DataProduct.model_json_schema())
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 2 — AI Model Registry
+# TAB 3 — AI Model Registry
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[1]:
+with tabs[2]:
     if not ai_models:
         st.info("No AI models. Run `python generate_ai_models.py` first.")
     else:
@@ -534,9 +647,9 @@ with tabs[1]:
             st.json(m.model_dump(mode="json"))
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 3 — Readiness Scores
+# TAB 4 — Readiness Scores
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[2]:
+with tabs[3]:
     compare_mode = st.checkbox("Compare two products side by side")
 
     if compare_mode:
@@ -607,9 +720,9 @@ with tabs[2]:
                     )
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 4 — Data Contracts
+# TAB 5 — Data Contracts
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[3]:
+with tabs[4]:
     sel = st.selectbox("Select a product", list(product_map.keys()), key="con_sel")
     p = product_map[sel]
     dc = p.data_contract
@@ -668,9 +781,9 @@ with tabs[3]:
         st.json(dc.model_dump(mode="json"))
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 5 — AI Consumption
+# TAB 6 — AI Consumption
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[4]:
+with tabs[5]:
     st.markdown("### Can an AI agent use this data product?")
     sel = st.selectbox("Select a product", list(product_map.keys()), key="ai_con_sel")
     p = product_map[sel]
@@ -813,9 +926,9 @@ with tabs[4]:
             )
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 6 — Lineage
+# TAB 7 — Lineage
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[5]:
+with tabs[6]:
     view_type = st.selectbox(
         "View",
         ["-- Select a view --", "Product lineage", "Data mesh architecture", "Process maps"],
@@ -851,9 +964,9 @@ with tabs[5]:
             render_mermaid(generate_maintenance_process_map(), height=600)
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 7 — Governance
+# TAB 8 — Governance
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[6]:
+with tabs[7]:
     # Governance health
     if products and users:
         mesh = mesh_principles_status(products, ai_models, users)
@@ -965,9 +1078,9 @@ with tabs[6]:
         st.info("No approval requests. Run `python generate_users.py` first.")
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 8 — Process Maps
+# TAB 9 — Process Maps
 # ════════════════════════════════════════════════════════════════════════════
-with tabs[7]:
+with tabs[8]:
     proc_sel = st.selectbox(
         "Select a process",
         ["-- Select a process --", "Procure-to-Pay", "Maintenance & Reliability"],
