@@ -3,7 +3,6 @@
 A portfolio project demonstrating how enterprise data products and AI models can be structured, documented and governed so they are safe for analytics and AI-agent consumption in industrial environments.
 
 Live demo - [AI-ready data product registry](https://mayowa-togun-ai-data-pdmgt-technical-portfolio-app.streamlit.app/)
-Live demo - <https://mayowa-togun-ai-data-pdmgt-technical-portfolio-app.streamlit.app>
 
 ## Why I built this
 I built this project to make my data product, AI governance and enterprise architecture thinking visible outside my day-to-day work. As a product leader in a regulated industrial environment, much of my contribution sits in decisions, processes, governance structures, stakeholder alignment and product trade-offs that are difficult to show in a traditional GitHub repository.
