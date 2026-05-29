@@ -1,82 +1,45 @@
-# Background and the idea behind this
+# AI-Ready Data Product Registry & Governance Platform
 
-I built this as a portfolio demonstration of my knowledge across data product governance, AI model management, and enterprise data architecture. As a product manager in a regulated industrial environment, much of my contribution is embedded in processes, decisions, and stakeholder outcomes that are difficult to showcase externally. This app is my way of making that knowledge visible and tangible.
-The governance models, readiness scoring framework, data contracts, process maps, and AI model lifecycle design are all based on patterns I have worked with across procurement, offshore logistics, and contract management at Equinor. The data is fully synthetic.
-How it was built
-I designed the architecture and domain logic, then used AI tools to accelerate the development:
-- Claude Opus 4.6 for prompt design, architecture planning, and stack selection
-- Claude Sonnet 4.6 and DeepSeek V4 Pro for code generation across different modules
-- Warp as the AI-assisted development terminal
-- Python and Streamlit as the application stack
+A portfolio project demonstrating how enterprise data products and AI models can be structured, documented and governed so they are safe for analytics and AI-agent consumption in industrial environments.
 
-Copy and paste this link in your browser to access the knowledge portfolio/app - <https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app>
+Live demo - <https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app>
 
-The following documents are also available in the main folder of this repository. You can view them to learn more about my prompt engineering, product requirement and architecture knowledge/skills
-- prompt-engineering-build-log.md
-- PRD.md
-- technical-architecture-document.md
+## Why I built this
+I built this project to make my data product, AI governance and enterprise architecture thinking visible outside my day-to-day work. As a product leader in a regulated industrial environment, much of my contribution sits in decisions, processes, governance structures, stakeholder alignment and product trade-offs that are difficult to show in a traditional GitHub repository.
+This application demonstrates how I think about the foundation layer required for AI at scale: governed data products, clear ownership, data contracts, lineage, quality expectations, AI usage policies, model risk controls and human-in-the-loop approval workflows.
+The examples are inspired by my experience working across procurement, offshore logistics and contract management in an industrial energy context. All data, scenarios, structures and users in this project are fully synthetic and fictional. The project does not contain real company data, proprietary architecture, internal system names, operational records or confidential material.
 
-# Mock up app & product description
-This platform demonstrates how enterprise data products and AI models can be structured, documented, and governed so they are safe for analytics and AI-agent consumption in industrial environments.
-A Streamlit application demonstrating how enterprise data products and AI models can be structured, documented, and governed for safe consumption in industrial environments. Inspired by platforms like Collibra, combined with AI model governance and data mesh architecture principles.
+## What this demonstrates
+This project shows how an enterprise could connect data product governance and AI model governance in one operating view. Many organisations have data catalogues, and many have AI/ML platforms, but the relationship between them is often implicit. This prototype makes that relationship explicit:
+  Which AI model or agent is allowed to consume which data product, under what conditions, with which quality requirements, autonomy limits and escalation rules?
 
-## Why this matters
+The platform includes:
+- A data product catalogue with ownership, metadata, quality rules, lineage and usage information
+- An AI model registry with evaluations, OKRs, risk classification, autonomy levels and data dependencies
+- AI-readiness scoring across eight governance dimensions
+- Data contract validation for analytics and AI-agent consumption
+- AI consumption rules showing permitted uses, prohibited uses and human-review triggers
+- Data mesh architecture and process maps for industrial workflows
+- Governance workflows for users, API keys and approvals
 
-AI agents and LLM-based systems increasingly need to consume enterprise data. But consuming raw, ungoverned data creates risks: hallucinations built on stale data, autonomous actions taken without authorisation, recommendations with no traceable source. Data products need clear ownership, quality rules, lineage, access controls, and explicit AI usage policies before agents can be trusted to act on them.
+## My contribution
+I designed the product concept, PRD, governance model, domain logic, data product structures, AI-readiness scoring framework, contract validation rules, information architecture and documentation.
 
-Beyond data governance, organisations deploying AI models need visibility into model performance, data dependencies, ownership, and the approval chains that control access. This platform demonstrates how data product governance and AI model governance connect — because an AI model is only as trustworthy as the data products it consumes.
+I used AI-assisted development tools to accelerate implementation, but the product framing, governance logic, domain model, acceptance criteria, synthetic scenario design and final integration decisions are my own.
 
-## Features
+##How it was built
+- Python and Streamlit for the application
+- Pydantic v2 for data models and validation
+- Faker for synthetic data generation
+- Mermaid for lineage and architecture diagrams
+- Warp as the AI-assisted development environment
+- AI coding assistants/agents for implementation acceleration and iteration support
 
-### Data product catalogue
-- Browse 5 enterprise data products across procurement, logistics, contract management, materials, and operations
-- View full metadata, schema, ownership, usage metrics, governance status, and sharing statistics
-- Realistic imperfections — not every product scores perfectly, showing real governance gaps
-- Inspect raw JSON data and schema definitions
+## Repository documents
+- PRD.md — product requirements, personas, user stories, functional requirements and acceptance criteria
+- technical-architecture-document.md — architecture, data flow and implementation notes
+- prompt-engineering-build-log.md — build process, prompt iterations and development decisions
 
-### AI model registry
-- Browse 6 AI models spanning agents, predictive models, NLP models, and anomaly detectors
-- View model descriptions, OKRs, evaluation history, and data dependencies
-- See which data products each model consumes and whether they meet quality requirements
-- Models span the full lifecycle: Development → Staging → Production
-
-### AI-readiness scoring
-- Score each data product across 8 governance dimensions (ownership, documentation, lineage, quality, access, AI policy, freshness, escalation)
-- Compare products side by side
-- See impact on dependent AI models when readiness scores are insufficient
-
-### Data contracts & validation
-- Validate contract completeness for production and AI consumption
-- View contracts as structured data or raw JSON
-- See which AI models are bound by each contract
-
-### AI consumption view
-- Answer: "Can an AI agent use this data product, and under what conditions?"
-- Show permitted/prohibited actions, autonomy levels, and human oversight requirements
-- Cross-reference with registered AI models consuming the product
-
-### Data mesh architecture
-- Visualise domain ownership, federated governance, and cross-domain data flows
-- Assess the 4 data mesh principles: domain ownership, data as product, self-serve platform, federated governance
-
-### Governance & access
-- User directory with roles and approval permissions
-- API key management with scoped access and simulated request workflow
-- Approval workflow tracking (pending, approved, rejected, escalated)
-- Governance health assessment across all 4 mesh principles
-
-### Process maps
-- Procure-to-Pay process map showing where data products and AI models are active
-- Maintenance & Reliability process map
-- Model coverage summary per process
-
-## Tech stack
-
-- Python 3.10+
-- Streamlit
-- Pydantic v2 (data validation and schemas)
-- Faker (synthetic data generation)
-- Mermaid via CDN (architecture and lineage diagrams — no extra dependency)
 
 ## Run locally
 
@@ -137,16 +100,6 @@ This platform models a data mesh with 5 domains:
 | Inventory Availability Snapshot | Materials Management | Internal | Recommend | Draft |
 | Maintenance Work Order History | Operations | Restricted | Read-only | Approved |
 
-## What this demonstrates
-
-- Defining data products as governed, documented assets with clear ownership and consumer contracts
-- Scoring enterprise data for AI-readiness across multiple governance dimensions
-- Validating data contracts for completeness before AI agents are permitted to consume
-- Modelling permitted, prohibited, and conditional AI usage rules per data product
-- Mapping data lineage from source systems through transformation layers to AI consumers
-- Registering AI models with evaluations, OKRs, and data dependency tracking
-- Implementing approval workflows and API key governance
-- Assessing data mesh maturity across 4 principles
 
 ## Disclaimer
 
