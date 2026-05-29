@@ -9,9 +9,12 @@ I designed the architecture and domain logic, then used AI tools to accelerate t
 - Warp as the AI-assisted development terminal
 - Python and Streamlit as the application stack
 
-Copy and paste this link in your browser to access the app - <https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app>
+Copy and paste this link in your browser to access the knowledge portfolio/app - <https://mayowa-togun-ai-data-pdmgt-techical-portfolio-app.streamlit.app>
 
-A detailed prompt engineering build log is available in the repository documenting every prompt, design decision, and verification step.
+The following documents are also available in the main folder of this repository. You can view them to learn more about my prompt engineering, product requirement and architecture knowledge/skills
+- prompt-engineering-build-log.md
+- PRD.md
+- technical-architecture-document.md
 
 # Mock up app & product description
 This platform demonstrates how enterprise data products and AI models can be structured, documented, and governed so they are safe for analytics and AI-agent consumption in industrial environments.
