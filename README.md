@@ -27,7 +27,7 @@ I designed the product concept, PRD, governance model, domain logic, data produc
 
 I used AI-assisted development tools to accelerate implementation, but the product framing, governance logic, domain model, acceptance criteria, synthetic scenario design and final integration decisions are my own.
 
-##How it was built
+## How it was built
 - Python and Streamlit for the application
 - Pydantic v2 for data models and validation
 - Faker for synthetic data generation
