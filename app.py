@@ -251,7 +251,7 @@ proprietary architecture, internal system names, or confidential material.
 - Token consumption monitoring for generative AI models
 - Governance workflows: users, roles, approvals, API access
 
-Built by **Mayowa Togun** | [GitHub](https://github.com/TMayowa)
+Built by **Mayowa Togun** | [LinkedIn](https://www.linkedin.com/in/mayowa-togun-24184b147/)
         """)
     with st.expander("Platform stats"):
         active_keys = sum(1 for k in api_keys if k.status == "Active")
@@ -333,7 +333,7 @@ with tabs[0]:
 
     st.divider()
 
-    st.subheader("Recommended 5-minute walkthrough")
+    st.subheader("Recommended 10-minute walkthrough")
 
     col1, col2 = st.columns(2)
 
@@ -343,10 +343,13 @@ with tabs[0]:
             **1. Data Catalogue** — Inspect a data product's ownership,
             metadata, quality rules, lineage, consumers, and limitations.
 
-            **2. Readiness Scores** — See how each data product is scored
+            **2. AI Model Registry** — Inspect model dependencies, evaluations,
+            OKRs, risk classification, and autonomy controls.
+
+            **3. Readiness Scores** — See how each data product is scored
             across eight AI-readiness dimensions.
 
-            **3. Data Contracts** — Review how quality rules, required metadata,
+            **4. Data Contracts** — Review how quality rules, required metadata,
             AI consumers, and escalation rules are structured.
             """
         )
@@ -354,14 +357,17 @@ with tabs[0]:
     with col2:
         st.markdown(
             """
-            **4. AI Consumption** — Answer: *Can an AI agent use this
+            **5. AI Consumption** — Answer: *Can an AI agent use this
             data product, and under what conditions?*
 
-            **5. Lineage** — Trace data from source systems through
+            **6. Lineage** — Trace data from source systems through
             transformations to AI consumers.
 
-            **6. AI Model Registry** — Inspect model dependencies, evaluations,
-            OKRs, risk classification, and autonomy controls.
+            **7. Governance** — View users, roles, approval workflows
+            API keys, and data mesh health accross the platform.
+
+            **8. Process Maps** — See where data products and AI models 
+            sit within Procure-to-Pay and Maintenance business processes.
             """
         )
 
