@@ -289,7 +289,7 @@ st.divider()
 # ── Tabs ──────────────────────────────────────────────────────────────────────
 
 tabs = st.tabs([
-    "🪧 Start Here"
+    "🪧 Start Here",
     "📦 Data Catalogue",
     "🤖 AI Model Registry",
     "📊 Readiness Scores",
